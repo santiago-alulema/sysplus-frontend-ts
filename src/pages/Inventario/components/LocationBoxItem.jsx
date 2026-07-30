@@ -1,6 +1,5 @@
 import { LocalizacionItemsRangoConfig } from "@/pages/Inventario/configs/LocalizacionItemsRangoConfig";
 import { Autocomplete, Box, Grid, TextField, Typography } from "@mui/material";
-import { kMaxLength } from "buffer";
 import { useEffect } from "react";
 
 const LocationBoxItem = ({ value, onChange, sxTextField }) => {

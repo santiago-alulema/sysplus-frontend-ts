@@ -19,6 +19,8 @@ import {
 } from '@mui/material';
 import LocationBoxItem from './LocationBoxItem';
 
+import styles from '../css/InventarioComponent.module.css';
+
 const InventarioCiegoCompoenent = ({ inventario }) => {
 
   const {
@@ -79,21 +81,21 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
 
   return (
     <Paper
-      elevation={4}
-      sx={{
-        p: { xs: 2.5, md: 4 },
-        width: '100%',
-        mx: 'auto',
-        borderRadius: 3,
-        textAlign: 'center',
-        backgroundColor: '#ffffff',
-        border: '1px solid #e5e7eb',
-        display:
-          seleccionarAgencia === '0' || !seleccionarAgencia
-            ? 'none'
-            : 'block'
-      }}
-    >
+  className={styles.inventarioCompacto}
+  elevation={4}
+  sx={{
+    width: '100%',
+    mx: 'auto',
+    borderRadius: 3,
+    textAlign: 'center',
+    backgroundColor: '#ffffff',
+    border: '1px solid #e5e7eb',
+    display:
+      seleccionarAgencia === '0' || !seleccionarAgencia
+        ? 'none'
+        : 'block'
+  }}
+>
       {/* <Typography
         textAlign="center"
         id="modal-modal-title"
@@ -272,13 +274,13 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
               backgroundColor: '#f9fafb',
               border: '1px solid #e5e7eb'
             }}
+            mb={1}
           >
-            <Grid container spacing={3}>
+            <Grid container spacing={1} mt={0.0001} >
               <Grid item lg={3} sm={12} xs={12}>
                 <TextField
                   id="CANTIDAD_BUEN_ESTADO"
                   label="BUEN ESTADO"
-                  variant="standard"
                   value={cantidadBuenEstado}
                   onChange={(e) => setCountProduct(e, setCantidadBuenEstado)}
                   fullWidth
@@ -297,7 +299,6 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
                 <TextField
                   id="CANTIDAD MAL ESTADO"
                   label="MAL ESTADO"
-                  variant="standard"
                   value={cantidadMalEstado}
                   onChange={(e) => setCountProduct(e, setCantidadMalEstado)}
                   fullWidth
@@ -309,7 +310,6 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
                 <TextField
                   id="CANTIDAD REVISION"
                   label="REVISION"
-                  variant="standard"
                   value={cantidadRevision}
                   onChange={(e) => setCountProduct(e, setCantidadRevision)}
                   fullWidth
@@ -321,7 +321,6 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
                 <TextField
                   id="CANTIDAD TOTAL"
                   label="TOTAL CONTADO"
-                  variant="standard"
                   value={cantidad}
                   disabled
                   fullWidth

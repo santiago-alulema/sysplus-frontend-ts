@@ -1,0 +1,262 @@
+.inventarioCompacto {
+  width: 100%;
+  padding: 16px 18px !important;
+}
+
+/* Reduce la separación entre filas y columnas */
+.inventarioCompacto :global(.MuiGrid-container) {
+  row-gap: 2px;
+}
+
+.inventarioCompacto :global(.MuiGrid-item) {
+  padding-top: 10px !important;
+}
+
+
+/* Quita el cuadro celeste de foco de todo el componente */
+.inventarioCompacto :global(*:focus),
+.inventarioCompacto :global(*:focus-visible),
+.inventarioCompacto :global(*:focus-within) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Material UI */
+.inventarioCompacto :global(.Mui-focused),
+.inventarioCompacto :global(.Mui-focusVisible),
+.inventarioCompacto :global(.MuiInputBase-root.Mui-focused),
+.inventarioCompacto :global(.MuiOutlinedInput-root.Mui-focused),
+.inventarioCompacto :global(.MuiAutocomplete-root:focus-within) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* TextField y Select de una sola línea */
+.inventarioCompacto
+  :global(.MuiOutlinedInput-root:not(.MuiInputBase-multiline)) {
+  height: 38px !important;
+  min-height: 38px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+}
+
+/* Contenido del TextField */
+.inventarioCompacto :global(.MuiOutlinedInput-input) {
+  height: auto !important;
+  padding: 8px 11px !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+}
+
+/* Select */
+.inventarioCompacto :global(.MuiSelect-select) {
+  min-height: auto !important;
+  padding: 8px 32px 8px 11px !important;
+  font-size: 13px !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Labels */
+.inventarioCompacto :global(.MuiInputLabel-root) {
+  font-size: 12.5px !important;
+  transform: translate(14px, 9px) scale(1);
+}
+
+.inventarioCompacto
+  :global(.MuiInputLabel-root.MuiInputLabel-shrink) {
+  font-size: 12px !important;
+  transform: translate(14px, -8px) scale(0.75);
+}
+
+/* Inputs variant standard: cantidades */
+.inventarioCompacto :global(.MuiInput-root) {
+  min-height: 34px !important;
+  font-size: 13px !important;
+}
+
+.inventarioCompacto :global(.MuiInput-root .MuiInputBase-input) {
+  padding: 5px 0 4px !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+}
+
+/* Labels de cantidades */
+.inventarioCompacto
+  :global(.MuiInputLabel-standard.MuiInputLabel-shrink) {
+  transform: translate(0, -2px) scale(0.75) !important;
+}
+
+/* Autocomplete usado en descripción y localización */
+.inventarioCompacto :global(.MuiAutocomplete-inputRoot) {
+  height: 38px !important;
+  min-height: 38px !important;
+  padding: 0 32px 0 8px !important;
+  align-items: center !important;
+}
+
+.inventarioCompacto :global(.MuiAutocomplete-input) {
+  padding: 7px 4px !important;
+  font-size: 13px !important;
+}
+
+/* Checkbox */
+.inventarioCompacto :global(.MuiCheckbox-root) {
+  padding: 5px !important;
+}
+
+.inventarioCompacto :global(.MuiCheckbox-root .MuiSvgIcon-root) {
+  font-size: 20px !important;
+}
+
+
+
+.inventarioCompacto :global(.MuiInputBase-input .MuiInput-inputt) {
+  font-size: 200000px !important;
+}
+
+.inventarioCompacto :global(.MuiFormControlLabel-root) {
+  margin-left: -5px;
+  margin-right: 0;
+}
+
+.inventarioCompacto :global(.MuiFormControlLabel-label) {
+  font-size: 12.5px !important;
+}
+
+/* Cajas internas */
+.inventarioCompacto :global(.MuiBox-root) {
+  border-radius: 8px;
+}
+
+/* Área de observaciones: compacta, pero conserva varias líneas */
+.inventarioCompacto :global(.MuiInputBase-multiline) {
+  min-height: 82px !important;
+  padding: 0 !important;
+  align-items: flex-start;
+}
+
+.inventarioCompacto :global(textarea.MuiInputBase-input) {
+  min-height: 58px !important;
+  padding: 10px 12px !important;
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+}
+
+/* Títulos y divisores */
+.inventarioCompacto :global(.MuiDivider-root) {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.inventarioCompacto :global(.MuiDivider-wrapper) {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.inventarioCompacto :global(.MuiDivider-wrapper .MuiTypography-root) {
+  font-size: 14px !important;
+}
+
+/* Botón grabar */
+.inventarioCompacto :global(.MuiButton-root) {
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 5px 18px !important;
+  border-radius: 18px !important;
+  font-size: 12px !important;
+}
+
+/* Íconos de Select y Autocomplete */
+.inventarioCompacto
+  :global(.MuiSelect-icon),
+.inventarioCompacto
+  :global(.MuiAutocomplete-popupIndicator .MuiSvgIcon-root) {
+  font-size: 19px !important;
+}
+
+.textFieldCompacto :global(.MuiOutlinedInput-root) {
+  height: 38px !important;
+  min-height: 38px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+}
+
+.textFieldCompacto :global(.MuiOutlinedInput-input) {
+  height: auto !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+}
+
+.textFieldCompacto :global(.MuiInputLabel-root) {
+  font-size: 13px!important;
+  transform: translate(14px, 8px) scale(1)!important;
+}
+
+.textFieldCompacto
+  :global(.MuiInputLabel-root.MuiInputLabel-shrink) {
+  font-size: 12px!important;
+  transform: translate(14px, -7px) scale(0.75)!important;
+}
+
+.textFieldCompacto :global(.MuiSvgIcon-root) {
+  font-size: 18px!important;
+}
+
+.textFieldCantidad {
+  margin: 0 !important;
+}
+
+/* Contenedor del input standard */
+.textFieldCantidad :global(.MuiInputBase-root.MuiInput-root) {
+  height: 30px !important;
+  min-height: 30px !important;
+  margin-top: 12px !important;
+}
+
+/* Valor ingresado */
+.textFieldCantidad :global(.MuiInputBase-input.MuiInput-input) {
+  height: 24px !important;
+  padding: 2px 0 3px !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+}
+
+/* Label */
+.textFieldCantidad :global(.MuiInputLabel-root.MuiInputLabel-standard) {
+  top: 0 !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+/* Label cuando está arriba */
+.textFieldCantidad
+  :global(.MuiInputLabel-root.MuiInputLabel-standard.MuiInputLabel-shrink) {
+  transform: translate(0, 0) scale(1) !important;
+  transform-origin: left top !important;
+}
+
+/* Línea inferior */
+.textFieldCantidad :global(.MuiInput-underline::before),
+.textFieldCantidad :global(.MuiInput-underline::after) {
+  bottom: 0 !important;
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+  .inventarioCompacto {
+    padding: 12px !important;
+  }
+
+  .inventarioCompacto :global(.MuiGrid-item) {
+    padding-top: 8px !important;
+  }
+
+  .inventarioCompacto
+    :global(.MuiOutlinedInput-root:not(.MuiInputBase-multiline)),
+  .inventarioCompacto :global(.MuiAutocomplete-inputRoot) {
+    height: 36px !important;
+    min-height: 36px !important;
+  }
+}

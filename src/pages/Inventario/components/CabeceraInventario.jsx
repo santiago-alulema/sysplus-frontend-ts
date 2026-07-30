@@ -139,7 +139,7 @@ const CabeceraInventario = ({
             <InfoItem
               icon={<BusinessOutlined />}
               label="Empresa"
-              value="EMPRESA TEST"
+              value={objectAgencia?.empresa ?? ""}
             />
           </Grid>
 

@@ -31,7 +31,6 @@ const InventarioCabeceraHook = () => {
 
   const OnInitPage = async () => {
     const user = Decrypt_User();
-console.log(user)
     if (user === null) {
       navigate('/');
       return;
