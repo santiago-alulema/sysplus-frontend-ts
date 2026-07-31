@@ -212,7 +212,7 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
     setEstadoKit(0);
     setObservacionesKit('');
     setActivarObservacionesKit(true);
-
+setCantidadRevision(0);
     setUbicacion({
       rac: '',
       columna: '',

@@ -10,6 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from '@/utils/dayjs-setup'
 import '@/config/axiosToken.config';
+import { LoadingContextProvider } from './componentesCommons/LoadingContext'
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <LocalizationProvider
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
       adapterLocale="es"
       dateLibInstance={dayjs}  // usa tu instancia con tz
     >
+      <LoadingContextProvider>
     <BrowserRouter>                      
       <AuthProvider>
         <ThemeProvider theme={theme}>
@@ -25,6 +27,7 @@ createRoot(document.getElementById('root')!).render(
         </ThemeProvider>
       </AuthProvider>
     </BrowserRouter>
+    </LoadingContextProvider>
     </LocalizationProvider>
   </React.StrictMode>
 )

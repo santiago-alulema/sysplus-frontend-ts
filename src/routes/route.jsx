@@ -99,6 +99,7 @@ import SubirPagosBancosPage from "@/pages/modulo-matriculacion/subir-pagos-banco
 import AgenciasInventarioPage from "@/pages/Inventario/pages/AgenciasInventarioPage";
 import TomaFisicaInventarioPage from "@/pages/Inventario/pages/TomaFisicaInventarioPage";
 import EmpleadosInventarioPage from "@/pages/Inventario/pages/EmpleadosInventarioPage";
+import ReporteProgresoPage from "@/pages/Inventario/pages/ReporteProgresoPage";
 
 export const routes = [
 
@@ -111,6 +112,8 @@ export const routes = [
   { path: "/cambio-numero-comprobante", element: <CambioNumeroComprobanteIndex /> },
   { path: "/subir-comprobantes", element: <ComprobantesPagosIndex /> },
   { path: "/reporte-comprobante-pagos", element: <ReporteComprobantePagoIndexs /> },
+  { path: "/reporte-progresos-inventario", element: <ReporteProgresoPage /> },
+
 
   { path: "/administracion-agencias-inventario", element: <AgenciasInventarioPage /> },
   { path: "/administracion-toma-fisica", element: <TomaFisicaInventarioPage /> },

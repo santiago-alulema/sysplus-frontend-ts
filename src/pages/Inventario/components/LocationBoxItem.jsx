@@ -4,9 +4,10 @@ import { useEffect } from "react";
 
 const LocationBoxItem = ({ value, onChange, sxTextField }) => {
   const handleChange = (campo) => (e, nuevaOpcion) => {
+    console.log("nuevaOpcion", nuevaOpcion)
     onChange({
       ...value,
-      [campo]: nuevaOpcion,
+      [campo]: nuevaOpcion.value,
     });
   };
 
