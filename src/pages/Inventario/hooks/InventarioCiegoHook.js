@@ -261,7 +261,8 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
         `${ubicacion.rac}`,
         `${ubicacion.columna}`,
         `${ubicacion.nivel}`,
-        `${ubicacion.posicion}`
+        `${ubicacion.posicion}`,
+        `${cantidadRevision}`
       );
 
       const resp = await SAVE_PRODUCT_INVENTORY(tomaFisicaProducto);

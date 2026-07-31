@@ -96,45 +96,53 @@ import ReporteComprobantePagoIndexs from "@/pages/Contabilidad/Pages/Comprobante
 import ControlMatriculacion from "@/pages/modulo-matriculacion/control-matriculacion";
 import SubirPagosSriPage from "@/pages/modulo-matriculacion/subir-pagos-sri.page";
 import SubirPagosBancosPage from "@/pages/modulo-matriculacion/subir-pagos-banco.page";
+import AgenciasInventarioPage from "@/pages/Inventario/pages/AgenciasInventarioPage";
+import TomaFisicaInventarioPage from "@/pages/Inventario/pages/TomaFisicaInventarioPage";
+import EmpleadosInventarioPage from "@/pages/Inventario/pages/EmpleadosInventarioPage";
 
 export const routes = [
-  
+
   { path: "/", element: <Index /> },
   { path: "/subir-inventario-open", element: <IndexSubirInventarioOpen /> },
   { path: "/premio-mastermoto", element: <RevisionPremiosIndex /> },
-  { path: "/entregar-premio", element: <ConfirmarEntregaPremioCliente />},
-  { path: "/reporte-inventario-fecha", element: <ReporteAuditoriaInventarioIndex />}, 
-  { path: "/crud-usuarios-pagos-extraordinarios", element: <AutorizarPagosExtraordinariosMatriculacionIndex />},
-  { path: "/cambio-numero-comprobante", element: <CambioNumeroComprobanteIndex />}, 
-  { path: "/subir-comprobantes", element: <ComprobantesPagosIndex />},
-  { path: "/reporte-comprobante-pagos", element: <ReporteComprobantePagoIndexs />}, 
-  
-  { path: "/control-matriculacion-principal", element: <ControlMatriculacion />},
-  { path: "/matriculacion-subir-pagos-sri", element: <SubirPagosSriPage />},
-  { path: "/matriculacion-subir-pagos-bancos", element: <SubirPagosBancosPage />},
+  { path: "/entregar-premio", element: <ConfirmarEntregaPremioCliente /> },
+  { path: "/reporte-inventario-fecha", element: <ReporteAuditoriaInventarioIndex /> },
+  { path: "/crud-usuarios-pagos-extraordinarios", element: <AutorizarPagosExtraordinariosMatriculacionIndex /> },
+  { path: "/cambio-numero-comprobante", element: <CambioNumeroComprobanteIndex /> },
+  { path: "/subir-comprobantes", element: <ComprobantesPagosIndex /> },
+  { path: "/reporte-comprobante-pagos", element: <ReporteComprobantePagoIndexs /> },
+
+  { path: "/administracion-agencias-inventario", element: <AgenciasInventarioPage /> },
+  { path: "/administracion-toma-fisica", element: <TomaFisicaInventarioPage /> },
+  { path: "/administracion-empleados-inventario", element: <EmpleadosInventarioPage /> },
 
 
-  { path: "/subir-pcrs", element: <SubirPcrsIndex />},
-
-  { path: "/descargar-cobros-originales", element: <DescargarCobrosOriginalesIndex />},
-  { path: "/subir-liquidaciones-tarjeta-creditos", element: <SubirLiquidacionesCT />},
-  { path: "/subir-cobros-originales", element: <TarjetasCreditoCT />},
+  { path: "/control-matriculacion-principal", element: <ControlMatriculacion /> },
+  { path: "/matriculacion-subir-pagos-sri", element: <SubirPagosSriPage /> },
+  { path: "/matriculacion-subir-pagos-bancos", element: <SubirPagosBancosPage /> },
 
 
-  { path: "/descargar-reporte-atm", element: <FormularioAtmIndex />},
-  { path: "/editar-cobros-originales", element: <EditarLiquidaCobrosOriginalesIndex />},
-  { path: "/editar-liquidaciones-tarjetas", element: <EditarLiquidacionesTarjetasIndex />},
-  { path: "/reporte-liquidaciones-tarjetas", element: <ReporteLiquidacionesCobrosIndex  />},
+  { path: "/subir-pcrs", element: <SubirPcrsIndex /> },
+
+  { path: "/descargar-cobros-originales", element: <DescargarCobrosOriginalesIndex /> },
+  { path: "/subir-liquidaciones-tarjeta-creditos", element: <SubirLiquidacionesCT /> },
+  { path: "/subir-cobros-originales", element: <TarjetasCreditoCT /> },
 
 
-  { path: "/reporte-no-liquidados-matricula", element: <ReporteNoLiquidadasIndex />},
-  { path: "/reporte-liquidados-matricula", element: <ReporteLiquidadosIndex />},
-  { path: "/cambiar-gestor-matriculacion", element: <CambioGestorMatriculaIndex />},
-  { path: "/reenviar-liquidacion", element: <ReenviarLiquidacionOpenIndex />},
-  { path: "/anular-liquidacion", element: <AnularLiquidacionIndex />},
-  { path: "/eliminar-cabecera-liquidacion", element: <EliminarAnticiposIndex />},
-  { path: "/subir-cartera-extra-judiciales", element: <SubirExtraJudicialesExcelIndex />},
-  { path: "/descargar-reporte-excel-cash-back-deUna", element: <ReporteCashBackDeUnaIndex />},
+  { path: "/descargar-reporte-atm", element: <FormularioAtmIndex /> },
+  { path: "/editar-cobros-originales", element: <EditarLiquidaCobrosOriginalesIndex /> },
+  { path: "/editar-liquidaciones-tarjetas", element: <EditarLiquidacionesTarjetasIndex /> },
+  { path: "/reporte-liquidaciones-tarjetas", element: <ReporteLiquidacionesCobrosIndex /> },
+
+
+  { path: "/reporte-no-liquidados-matricula", element: <ReporteNoLiquidadasIndex /> },
+  { path: "/reporte-liquidados-matricula", element: <ReporteLiquidadosIndex /> },
+  { path: "/cambiar-gestor-matriculacion", element: <CambioGestorMatriculaIndex /> },
+  { path: "/reenviar-liquidacion", element: <ReenviarLiquidacionOpenIndex /> },
+  { path: "/anular-liquidacion", element: <AnularLiquidacionIndex /> },
+  { path: "/eliminar-cabecera-liquidacion", element: <EliminarAnticiposIndex /> },
+  { path: "/subir-cartera-extra-judiciales", element: <SubirExtraJudicialesExcelIndex /> },
+  { path: "/descargar-reporte-excel-cash-back-deUna", element: <ReporteCashBackDeUnaIndex /> },
 
 
   { path: "/cambio-fecha-caja", element: <CambioCajaMatriculacionIndex /> },
@@ -227,4 +235,3 @@ export const routes = [
   { path: "/ReporteGeneralcontable", element: <ReporteGeneral title="Inventario Cartera Contable" conrangofechas={false} tipoReporte="REPORT_EXCEL_CARTERA_CONTABLE" departamento="Contabilidad" /> },
   { path: "/ReporteInventarioGeneral", element: <ReporteGeneral title="Inventario reporte general" conrangofechas={false} tipoReporte="REPORT_EXCEL_INVENTARIO_ACTUAL" departamento="Contabilidad" /> },
 ];
- 
