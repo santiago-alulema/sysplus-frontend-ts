@@ -1,3 +1,7 @@
+import { ActionColumn } from '@/componentesCommons/DataGridCommon/ActionConfig';
+import { IActionConfig } from '@/componentesCommons/DataGridCommon/IActionConfig';
+import RenderHTML from '@/componentesCommons/DataGridCommon/RenderHTML';
+import TextFieldCustomDataGrid from '@/componentesCommons/DataGridCommon/TextFieldCustomDataGrid';
 import type { Column } from '@devexpress/dx-react-grid';
 import {
   FilteringState,
@@ -32,10 +36,6 @@ import type {
   ReactNode
 } from 'react';
 
-import { ActionColumn } from './DataGridCommon/ActionConfig';
-import type { IActionConfig } from './DataGridCommon/IActionConfig';
-import RenderHTML from './DataGridCommon/RenderHTML';
-import TextFieldCustomDataGrid from './DataGridCommon/TextFieldCustomDataGrid';
 
 type HorizontalAlignment = 'left' | 'center' | 'right';
 
@@ -834,9 +834,8 @@ const CustomDataGridTs = <T extends object,>({
 
       if (column.hiddenFilterColumn) {
         return (
-          <Table.Cell
+          <TableFilterRow.Cell
             {...props}
-            value={null}
             style={filterCellStyle}
           />
         );

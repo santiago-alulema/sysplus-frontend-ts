@@ -1,16 +1,17 @@
-import { Column } from '@devexpress/dx-react-grid';
+import { DataGridColumn } from '@/componentesCommons/CustomDataGridTs';
+import { sorteoDtoIn } from '@/pages/SorteoMotosAdministracion/models/sorteoDtoIn';
 import { useMemo } from 'react';
 
 export const ConfigSorteoTikTok = () => {
 
-    const columns = useMemo<Column[]>(
+    const columns = useMemo<DataGridColumn<sorteoDtoIn>[]>(
         () => [
             {
                 name: 'ci',
                 title: 'Cedula',
                 width: '10%',
                 align: 'center',
-                getCellValue: (row: any) => {
+                getCellValue: (row: sorteoDtoIn) => {
                     const ci = String(row.ci ?? '');
                     if (ci.length <= 4) return '*'.repeat(ci.length);
                     return '*'.repeat(ci.length - 4) + ci.slice(-4);
@@ -45,7 +46,7 @@ export const ConfigSorteoTikTok = () => {
                 title: 'Celular',
                 width: '10%',
                 align: 'left',
-                getCellValue: (row: any) => {
+                getCellValue: (row: sorteoDtoIn) => {
                     const ci = String(row.ci ?? '');
                     if (ci.length <= 4) return '*'.repeat(ci.length);
                     return '*'.repeat(ci.length - 4) + ci.slice(-4);

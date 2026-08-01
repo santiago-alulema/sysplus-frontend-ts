@@ -57,19 +57,13 @@ export interface DataGridColumn<T extends object>
 
   hiddenFilterColumn?: boolean;
   sortingEnabled?: boolean;
-
-  /**
-   * Por defecto se detecta automáticamente.
-   * Puedes establecerlo manualmente para casos ambiguos,
-   * por ejemplo códigos numéricos que deben ordenarse como texto.
-   */
   dataType?: DataGridColumnType;
 
-  getCellValue?: (row: T) => unknown;
+  getCellValue?: (
+    row: T,
+    columnName: string
+  ) => unknown;
 
-  /**
-   * Comparador personalizado opcional.
-   */
   sortComparer?: (left: unknown, right: unknown) => number;
 }
 
@@ -101,15 +95,7 @@ interface Props<T extends object> {
   gridId: string;
 
   getRowId?: (row: T) => string | number;
-
-  /**
-   * Nombre corregido.
-   */
   columnsHide?: readonly string[];
-
-  /**
-   * Se mantiene para compatibilidad con implementaciones anteriores.
-   */
   columsHide?: readonly string[];
 
   actions?: readonly IActionConfig<T>[];
@@ -407,7 +393,7 @@ const getColumnValue = <T extends object>(
   column: DataGridColumn<T>
 ): unknown => {
   if (column.getCellValue) {
-    return column.getCellValue(row);
+    return column.getCellValue(row, column.name);
   }
 
   return Reflect.get(row, column.name);
@@ -834,9 +820,8 @@ const CustomDataGridTs = <T extends object,>({
 
       if (column.hiddenFilterColumn) {
         return (
-          <Table.Cell
+          <TableFilterRow.Cell
             {...props}
-            value={null}
             style={filterCellStyle}
           />
         );

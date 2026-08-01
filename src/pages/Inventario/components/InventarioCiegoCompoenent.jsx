@@ -81,21 +81,21 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
 
   return (
     <Paper
-  className={styles.inventarioCompacto}
-  elevation={4}
-  sx={{
-    width: '100%',
-    mx: 'auto',
-    borderRadius: 3,
-    textAlign: 'center',
-    backgroundColor: '#ffffff',
-    border: '1px solid #e5e7eb',
-    display:
-      seleccionarAgencia === '0' || !seleccionarAgencia
-        ? 'none'
-        : 'block'
-  }}
->
+      className={styles.inventarioCompacto}
+      elevation={4}
+      sx={{
+        width: '100%',
+        mx: 'auto',
+        borderRadius: 3,
+        textAlign: 'center',
+        backgroundColor: '#ffffff',
+        border: '1px solid #e5e7eb',
+        display:
+          seleccionarAgencia === '0' || !seleccionarAgencia
+            ? 'none'
+            : 'block'
+      }}
+    >
       {/* <Typography
         textAlign="center"
         id="modal-modal-title"
@@ -276,37 +276,33 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
             }}
             mb={1}
           >
-            <Grid container spacing={1} mt={0.0001} >
-              <Grid item lg={3} sm={12} xs={12}>
-                <TextField
-                  id="CANTIDAD_BUEN_ESTADO"
-                  label="BUEN ESTADO"
-                  value={cantidadBuenEstado}
-                  onChange={(e) => setCountProduct(e, setCantidadBuenEstado)}
-                  fullWidth
-                  autoComplete="off"
-                  inputProps={{
-                    autoComplete: 'off',
-                    form: {
-                      autoComplete: 'off'
-                    }
-                  }}
-                  sx={estiloLaberBuenMalEstado('#4CAF50')}
-                />
-              </Grid>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+              <TextField
+                id="CANTIDAD_BUEN_ESTADO"
+                label="BUEN ESTADO"
+                value={cantidadBuenEstado}
+                onChange={(e) => setCountProduct(e, setCantidadBuenEstado)}
+                fullWidth
+                autoComplete="off"
+                inputProps={{
+                  autoComplete: 'off',
+                  form: {
+                    autoComplete: 'off'
+                  }
+                }}
+                sx={estiloLaberBuenMalEstado('#4CAF50')}
+              />
 
-              <Grid item lg={3} sm={12} xs={12}>
-                <TextField
-                  id="CANTIDAD MAL ESTADO"
-                  label="MAL ESTADO"
-                  value={cantidadMalEstado}
-                  onChange={(e) => setCountProduct(e, setCantidadMalEstado)}
-                  fullWidth
-                  sx={estiloLaberBuenMalEstado('#FF5733')}
-                />
-              </Grid>
+              <TextField
+                id="CANTIDAD MAL ESTADO"
+                label="MAL ESTADO"
+                value={cantidadMalEstado}
+                onChange={(e) => setCountProduct(e, setCantidadMalEstado)}
+                fullWidth
+                sx={estiloLaberBuenMalEstado('#FF5733')}
+              />
 
-              <Grid item lg={3} sm={12} xs={12}>
+              {userLogin?.Parametros?.tiene_cantidad_revision_inventario && (
                 <TextField
                   id="CANTIDAD REVISION"
                   label="REVISION"
@@ -315,35 +311,33 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
                   fullWidth
                   sx={estiloLaberBuenMalEstado('#33346d')}
                 />
-              </Grid>
+              )}
 
-              <Grid item lg={userLogin?.Parametros?.tiene_multi_inventarios ? 3 : 3} sm={12} xs={12}>
-                <TextField
-                  id="CANTIDAD TOTAL"
-                  label="TOTAL CONTADO"
-                  value={cantidad}
-                  disabled
-                  fullWidth
-                  sx={{
-                    "& .MuiInputBase-input": {
-                      fontWeight: 700,
-                      fontSize: 18,
-                    },
-                    "& .MuiInputBase-input.Mui-disabled": {
-                      WebkitTextFillColor: "#000",
-                      opacity: 1,
-                    },
-                    "& .MuiInputLabel-shrink": {
-                      fontWeight: 900,
-                      fontSize: 18,
-                    },
-                    "& .MuiInputLabel.Mui-disabled": {
-                      opacity: 1,
-                    }
-                  }}
-                />
-              </Grid>
-            </Grid>
+              <TextField
+                id="CANTIDAD TOTAL"
+                label="TOTAL CONTADO"
+                value={cantidad}
+                disabled
+                fullWidth
+                sx={{
+                  "& .MuiInputBase-input": {
+                    fontWeight: 700,
+                    fontSize: 18,
+                  },
+                  "& .MuiInputBase-input.Mui-disabled": {
+                    WebkitTextFillColor: "#000",
+                    opacity: 1,
+                  },
+                  "& .MuiInputLabel-shrink": {
+                    fontWeight: 900,
+                    fontSize: 18,
+                  },
+                  "& .MuiInputLabel.Mui-disabled": {
+                    opacity: 1,
+                  }
+                }}
+              />
+            </Stack>
           </Box>
         </Grid>
 
@@ -477,7 +471,7 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
               placeholder="Escribir...."
               multiline
               disabled={activarObservacionesKit}
-              rows={4}
+              rows={1}
               variant="standard"
               value={observacionesKit}
               onChange={(e) => setObservacionesKit(e.target.value)}
@@ -515,11 +509,8 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
             </Typography>
           </Divider>
         </Grid>
-
         <Grid item lg={12} sm={12} xs={12}>
           <Box>
-
-
             <TextField
               fullWidth
               id="observacion-general"
@@ -530,7 +521,7 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
               value={observacion}
               onChange={(e) => setObservacion(e.target.value)}
               disabled={
-                userLogin?.Parametros?.tiene_habilitado_observacion_inventario
+                !userLogin?.Parametros?.tiene_habilitado_observacion_inventario && !(observationSelection === 'OTROS')
               }
               variant="outlined"
               sx={{

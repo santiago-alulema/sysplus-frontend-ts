@@ -30,13 +30,11 @@ const TomaFisicaInventarioPage = () => {
         abrirEditar,
         cerrarFormulario,
         guardarTomaFisica,
-        eliminarTomaFisica,
         cargarDatos
     } = useTomasFisicasInventario();
 
     const columns = crearTomaFisicaInventarioColumns(
         abrirEditar,
-        eliminarTomaFisica
     );
 
     return (

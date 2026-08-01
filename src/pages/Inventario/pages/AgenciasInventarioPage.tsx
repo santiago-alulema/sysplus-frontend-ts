@@ -33,17 +33,15 @@ const AgenciasInventarioPage = () => {
         abrirEditar,
         cerrarFormulario,
         guardarAgencia,
-        eliminarAgencia,
         cargarDatos
     } = useAgencias();
 
     const columns = useMemo(
         () =>
             crearAgenciaColumns(
-                abrirEditar,
-                eliminarAgencia
+                abrirEditar
             ),
-        [abrirEditar, eliminarAgencia]
+        [abrirEditar,]
     );
 
     return (
