@@ -1,4 +1,4 @@
-import { DataGridColumn } from '@/componentesCommons/CustomDataGridTs';
+import { DataGridColumn } from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 import { sorteoDtoIn } from '@/pages/SorteoMotosAdministracion/models/sorteoDtoIn';
 import { useMemo } from 'react';
 

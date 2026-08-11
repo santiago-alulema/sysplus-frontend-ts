@@ -439,7 +439,7 @@ const UploadExcel: React.FC<ExcelUploaderProps> = ({
             <DropzoneContainer {...getRootProps()} isDragActive={isDragActive} elevation={3}>
                 <input {...getInputProps()} />
                 <UploadIcon color="primary" sx={{ fontSize: "48px !important", mb: 2 }} />
-                <Typography className='titleBasePage' variant="h6" gutterBottom>
+                <Typography className='titleBasePage' variant="h6" gutterBottom >
                     {legend}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
@@ -510,15 +510,15 @@ const UploadExcel: React.FC<ExcelUploaderProps> = ({
             )}
 
             {file && !isLoading && (
-                <Paper elevation={2} sx={{ mt: 2, p: 2 }}>
+                <Paper elevation={2} sx={{ mt: 2, p: 2 }} >
                     <Box display="flex" alignItems="center" justifyContent="space-between">
                         <Box display="flex" alignItems="center">
                             <Avatar sx={{ bgcolor: 'success.light', mr: 2 }}>
                                 <FileIcon color="success" />
                             </Avatar>
-                            <Box>
-                                <Typography variant="subtitle1">{file.name}</Typography>
-                                <Typography variant="caption" color="text.secondary">
+                            <Box sx={{fontSize: 10}}>
+                                <Typography variant="subtitle1" sx={{fontSize: 14}}>{file.name}</Typography>
+                                <Typography variant="caption" color="text.secondary" sx={{fontSize: 11}}>
                                     {fileSize} · {fileData.length} filas procesadas
                                 </Typography>
                             </Box>
@@ -542,17 +542,17 @@ const UploadExcel: React.FC<ExcelUploaderProps> = ({
                                             {Object.keys(fileData[0])
                                                 .filter(k => k !== '__rowNumber')
                                                 .map(key => (
-                                                    <TableCell key={key}>{key}</TableCell>
+                                                    <TableCell key={key} sx={{fontSize: 11}}>{key}</TableCell>
                                                 ))}
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {fileData.slice(0, 3).map((row, i) => (
+                                        {fileData.slice(0, 2).map((row, i) => (
                                             <TableRow key={i}>
                                                 {Object.entries(row)
                                                     .filter(([k]) => k !== '__rowNumber')
                                                     .map(([key, value]) => (
-                                                        <TableCell key={key}>
+                                                        <TableCell key={key} sx={{fontSize: 11}}>
                                                             {value === null ? 'NULL' : String(value)}
                                                         </TableCell>
                                                     ))}

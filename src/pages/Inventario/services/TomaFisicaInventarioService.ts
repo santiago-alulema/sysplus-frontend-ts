@@ -7,6 +7,8 @@ import type {
 
 import TomaFisicaInventarioEndPoint
     from './TomaFisicaInventarioEndPoint';
+import { InventarioCrearOpenBravoOutDto } from '../models/InventarioCrearOpenBravoOutDto';
+import { ReconteoInventarioOutDto } from '../models/ReconteoInventarioOutDto';
 
 export const obtenerTomasFisicasInventario = () =>
     request<TomaFisicaInventario[]>(
@@ -31,9 +33,7 @@ export const obtenerTomaFisicaPorId = (
         `${TomaFisicaInventarioEndPoint.OBTENER_POR_ID}/${empresaId}/${id}`
     );
 
-export const crearTomaFisicaInventario = (
-    data: TomaFisicaInventarioFormData
-) =>
+export const crearTomaFisicaInventario = (data: TomaFisicaInventarioFormData) =>
     request<TomaFisicaInventario>(
         'post',
         TomaFisicaInventarioEndPoint.CREAR,
@@ -54,8 +54,23 @@ export const actualizarTomaFisicaInventario = (
 export const eliminarTomaFisicaInventario = (
     empresaId: string,
     id: string
-) =>
-    request<void>(
+) =>request<void>(
         'delete',
         `${TomaFisicaInventarioEndPoint.ELIMINAR}/${empresaId}/${id}`
+    );
+
+
+
+export const grabarNuevoInventarioServicioWeb = (inventarioNuevo: InventarioCrearOpenBravoOutDto[]) =>
+    request<string>(
+        'post',
+        `${TomaFisicaInventarioEndPoint.SUBIR_TOMA_FISICA_BASE_CONOCIMIENTOS}`,
+        inventarioNuevo
+    );
+
+    export const grabarReconteoOpenBravoServicioWeb = (inventarioNuevo: ReconteoInventarioOutDto) =>
+    request<string>(
+        'post',
+        `${TomaFisicaInventarioEndPoint.SUBIR_RECONTEO_INVENTARIO}`,
+        inventarioNuevo
     );

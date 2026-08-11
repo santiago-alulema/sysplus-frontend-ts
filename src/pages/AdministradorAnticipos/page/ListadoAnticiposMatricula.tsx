@@ -1,4 +1,4 @@
-import CustomDataGridTs from "@/componentesCommons/CustomDataGridTs"
+import CustomDataGridTs from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 import { AnticiposConfiguracionColumnas } from "../configurations/AnticiposConfiguracionColumnas"
 import React, { useEffect, useState } from "react"
 import { anticipoPorLiquidarServiceWeb } from "../services/ServicioWebAnticipoAdministracion"

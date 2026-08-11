@@ -10,7 +10,7 @@ import {
 import type {
     Agencia
 } from '../models/agencia.model';
-import { DataGridColumn } from '@/componentesCommons/CustomDataGridTs';
+import { DataGridColumn } from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 
 export const crearAgenciaColumns = (
     onEditar: (agencia: Agencia) => void,

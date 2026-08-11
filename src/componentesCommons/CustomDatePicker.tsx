@@ -2,8 +2,7 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/es';
-import { useState, useEffect } from 'react';
-import { TextField } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 
 dayjs.locale('es');
@@ -23,7 +22,7 @@ interface CustomDatePickerProps {
 const CustomDatePicker = ({
     label = '',
     defaultValue = '',
-    onChangeValue = () => { },
+    onChangeValue = () => {},
     inputFormat = 'DD/MM/YYYY',
     returnFormat = 'YYYY-MM-DD',
     minDate = '1980-01-01',
@@ -34,40 +33,43 @@ const CustomDatePicker = ({
     const [selectedDate, setSelectedDate] = useState<Dayjs | null>(
         defaultValue ? dayjs(defaultValue) : null
     );
-    const [minDateValue, setMinDateValue] = useState<Dayjs | null>(null);
-    const [maxDateValue, setMaxDateValue] = useState<Dayjs | null>(null);
-    const [isFocus, setIsFocus] = useState(false);
+
     const theme = useTheme();
 
     useEffect(() => {
-        setMinDateValue(minDate ? dayjs(minDate) : null);
-    }, [minDate]);
-
-    useEffect(() => {
-        setMaxDateValue(maxDate ? dayjs(maxDate) : null);
-    }, [maxDate]);
+        setSelectedDate(defaultValue ? dayjs(defaultValue) : null);
+    }, [defaultValue]);
 
     const handleChange = (newValue: Dayjs | null) => {
         setSelectedDate(newValue);
-        const formatted = newValue?.format(returnFormat) ?? null;
-        onChangeValue(formatted);
+
+        const formattedValue = newValue?.isValid()
+            ? newValue.format(returnFormat)
+            : null;
+
+        onChangeValue(formattedValue);
     };
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
+        <LocalizationProvider
+            dateAdapter={AdapterDayjs}
+            adapterLocale="es"
+        >
             <DatePicker
                 label={
                     <>
                         {label}
                         {requiredField && (
-                            <span style={{ color: theme.palette.error.main ?? 'red' }}> *</span>
+                            <span style={{ color: theme.palette.error.main }}>
+                                {' '}*
+                            </span>
                         )}
                     </>
                 }
                 value={selectedDate}
                 onChange={handleChange}
-                minDate={minDateValue}
-                maxDate={maxDateValue}
+                minDate={minDate ? dayjs(minDate) : undefined}
+                maxDate={maxDate ? dayjs(maxDate) : undefined}
                 format={inputFormat}
                 disabled={disabled}
                 slotProps={{
@@ -76,14 +78,7 @@ const CustomDatePicker = ({
                         variant: 'outlined',
                         inputProps: {
                             readOnly: true
-                        },
-                        onClick: (event) => {
-                            event.stopPropagation();
-                            const button = event.currentTarget.parentElement?.querySelector('button');
-                            if (button) (button as HTMLButtonElement).click();
-                        },
-                        onFocus: () => setIsFocus(true),
-                        onBlur: () => setIsFocus(false)
+                        }
                     }
                 }}
             />

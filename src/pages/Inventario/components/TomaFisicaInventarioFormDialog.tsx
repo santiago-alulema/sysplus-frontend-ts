@@ -146,7 +146,7 @@ const TomaFisicaInventarioFormDialog = ({
                 component="form"
                 onSubmit={handleSubmit}
             >
-                <DialogTitle>
+                <DialogTitle color='black'>
                     {tomaFisica
                         ? 'Editar toma física'
                         : 'Nueva toma física'}
@@ -259,13 +259,16 @@ const TomaFisicaInventarioFormDialog = ({
 
                 <DialogActions>
                     <Button
+                        color='error'
                         onClick={onClose}
                         disabled={guardando}
+                        variant="contained"
                     >
                         Cancelar
                     </Button>
 
                     <Button
+                        color='success'
                         type="submit"
                         variant="contained"
                         disabled={guardando}

@@ -1,4 +1,4 @@
-import CustomDataGridTs from "@/componentesCommons/CustomDataGridTs"
+import CustomDataGridTs from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 import { ConfigSorteoTikTok } from "../configs/ConfigSorteoTikTok"
 import { useEffect, useState } from "react"
 import { sorteoDtoIn } from "../models/sorteoDtoIn"

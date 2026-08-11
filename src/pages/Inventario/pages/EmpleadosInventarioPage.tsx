@@ -18,7 +18,7 @@ import {
     useEmpleados
 } from '../hooks/useEmpleados';
 import { crearEmpleadoColumns } from '@/pages/Inventario/configs/EmpleadoInventarioColumns';
-import CustomDataGridTs from '@/componentesCommons/CustomDataGridTs';
+import CustomDataGridTs from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 
 const EmpleadosInventarioPage = () => {
     const {

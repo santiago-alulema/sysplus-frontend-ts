@@ -31,19 +31,19 @@ const theme = createTheme({
     button: { textTransform: "none", fontWeight: 600 },
   },
   components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: "10px",
-          padding: "10px 20px",
-          background: "linear-gradient(90deg, #1e3a8a, #0a192f)",
-          color: "#fff",
-          "&:hover": {
-            background: "linear-gradient(90deg, #0a192f, #1e3a8a)",
-          },
-        },
-      },
-    },
+    // MuiButton: {
+    //   styleOverrides: {
+    //     root: {
+    //       borderRadius: "10px",
+    //       padding: "10px 20px",
+    //       background: "linear-gradient(90deg, #1e3a8a, #0a192f)",
+    //       color: "#fff",
+    //       "&:hover": {
+    //         background: "linear-gradient(90deg, #0a192f, #1e3a8a)",
+    //       },
+    //     },
+    //   },
+    // },
     MuiPaper: {
       styleOverrides: {
         root: {

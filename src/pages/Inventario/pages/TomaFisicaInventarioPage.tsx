@@ -15,7 +15,10 @@ import {
     useTomasFisicasInventario
 } from '../hooks/useTomasFisicasInventario';
 import { crearTomaFisicaInventarioColumns } from '@/pages/Inventario/configs/TomaFisicaInventarioColumns';
-import CustomDataGridTs from '@/componentesCommons/CustomDataGridTs';
+import CustomDataGridTs from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
+import CustomModalTs from '@/componentesCommons/CustomModalTs';
+import SubirInventarioModal from '../components/SubirInventarioModal';
+import SubirReConteoInventario from '../components/SubirReConteoInventario';
 
 const TomaFisicaInventarioPage = () => {
     const {
@@ -30,11 +33,19 @@ const TomaFisicaInventarioPage = () => {
         abrirEditar,
         cerrarFormulario,
         guardarTomaFisica,
-        cargarDatos
+        cargarDatos,
+        abrirModalSubidaInventario, 
+        setAbrirModalSubidaInventario,
+        abrirSubirInventario,
+        abrirModalSubirReconteo, 
+        setAbrirModalSubirReconteo,
+        abrirSubirReconteo
     } = useTomasFisicasInventario();
 
     const columns = crearTomaFisicaInventarioColumns(
         abrirEditar,
+        abrirSubirInventario,
+        abrirSubirReconteo
     );
 
     return (
@@ -129,6 +140,14 @@ const TomaFisicaInventarioPage = () => {
                 onClose={cerrarFormulario}
                 onGuardar={guardarTomaFisica}
             />
+
+            <CustomModalTs width='80%' open={abrirModalSubidaInventario} handleClose={() => setAbrirModalSubidaInventario(false)} >
+                <SubirInventarioModal inventario={tomaFisicaSeleccionada ?? undefined} />
+            </CustomModalTs>
+
+             <CustomModalTs width='80%' open={abrirModalSubirReconteo} handleClose={() => setAbrirModalSubirReconteo(false)} >
+                <SubirReConteoInventario inventario={tomaFisicaSeleccionada ?? undefined} cerrarModal={setAbrirModalSubirReconteo} />
+            </CustomModalTs>
         </Box>
     );
 };

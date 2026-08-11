@@ -28,21 +28,15 @@ const obtenerMensajeError = (error: unknown): string => {
 };
 
 export const useTomasFisicasInventario = () => {
-    const [tomasFisicas, setTomasFisicas] =
-        useState<TomaFisicaInventario[]>([]);
-
-    const [empresas, setEmpresas] =
-        useState<EmpresaOption[]>([]);
-
-    const [
-        tomaFisicaSeleccionada,
-        setTomaFisicaSeleccionada
-    ] = useState<TomaFisicaInventario | null>(null);
-
-    const [formularioAbierto, setFormularioAbierto] =
-        useState(false);
-
+    const [tomasFisicas, setTomasFisicas] =useState<TomaFisicaInventario[]>([]);
+    const [empresas, setEmpresas] =useState<EmpresaOption[]>([]);
+    const [tomaFisicaSeleccionada,setTomaFisicaSeleccionada] = useState<TomaFisicaInventario | null>(null);
+    const [formularioAbierto, setFormularioAbierto] = useState(false);
     const [cargando, setCargando] = useState(false);
+    const [abrirModalSubidaInventario, setAbrirModalSubidaInventario] = useState(false);
+    const [abrirModalSubirReconteo, setAbrirModalSubirReconteo] = useState(false);
+
+
     const [guardando, setGuardando] = useState(false);
     const [error, setError] = useState('');
 
@@ -78,13 +72,24 @@ export const useTomasFisicasInventario = () => {
         setError('');
     };
 
-    const abrirEditar = (
-        tomaFisica: TomaFisicaInventario
-    ): void => {
+    const abrirEditar = (tomaFisica: TomaFisicaInventario): void => {
         setTomaFisicaSeleccionada(tomaFisica);
         setFormularioAbierto(true);
         setError('');
     };
+
+    const abrirSubirInventario = (tomaFisica: TomaFisicaInventario): void => {
+        setTomaFisicaSeleccionada(tomaFisica);
+        setAbrirModalSubidaInventario(true);
+        setError('');
+    };
+
+    const abrirSubirReconteo = (tomaFisica: TomaFisicaInventario): void => {
+        setTomaFisicaSeleccionada(tomaFisica);
+        setAbrirModalSubirReconteo(true);
+        setError('');
+    };
+
 
     const cerrarFormulario = (): void => {
         if (guardando) {
@@ -166,6 +171,12 @@ export const useTomasFisicasInventario = () => {
         cerrarFormulario,
         guardarTomaFisica,
         eliminarTomaFisica,
-        cargarDatos
+        cargarDatos,
+        abrirModalSubidaInventario, 
+        setAbrirModalSubidaInventario,
+        abrirSubirInventario,
+        abrirModalSubirReconteo, 
+        setAbrirModalSubirReconteo,
+        abrirSubirReconteo
     };
 };

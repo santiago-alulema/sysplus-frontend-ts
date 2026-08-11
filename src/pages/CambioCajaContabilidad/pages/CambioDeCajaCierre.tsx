@@ -1,4 +1,4 @@
-import CustomDataGridTs from "@/componentesCommons/CustomDataGridTs"
+import CustomDataGridTs from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 import { ConfiguracionColumnasCierreCajas } from "../configs/ConfiguracionColumnasCierreCajas"
 import { useEffect, useState } from "react"
 import { Divider } from "@mui/material"
@@ -57,7 +57,7 @@ const CambioDeCajaCierre = () => {
                                 type: 'warning',
                                 callBackFunction: false,
                             };
-        const respuesta = showAlertConfirm(configAlert);
+        const respuesta = await showAlertConfirm(configAlert);
         if(respuesta){
             startLoading();
             await catualizarFechaCierreCaja(agencia.id,fecha)

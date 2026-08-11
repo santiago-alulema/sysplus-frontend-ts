@@ -1,0 +1,30 @@
+export interface InventarioCrearOpenBravoOutDto {
+    categoria?: string | null;
+    codigo?: string | null;
+    nombre?: string | null;
+    atributo1?: string | null;
+    atributo2?: string | null;
+    atributo3?: string | null;
+    atributo4?: string | null;
+    atributo5?: string | null;
+    tercero?: string | null;
+    factura?: string | null;
+    cantidad?: number | null;
+    unidad?: string | null;
+    fechaPedido?: string | null;
+    costo?: number | null;
+    costoModificado?: number | null;
+    codigoOem?: string | null;
+    almacen?: string | null;
+    ubicacion?: string | null;
+    usuario?: string | null;
+    fechaAuditoria?: string | null;
+    status?: string | null;
+    nombreCampania?: string | null;
+    idTomaFisicaInventario?: string | null;
+    empresaId?: string | null;
+    rac?: string | null;
+    columna?: string | null;
+    nivel?: string | null;
+    posicion?: string | null;
+}

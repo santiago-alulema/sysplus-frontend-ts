@@ -1,9 +1,11 @@
+import { DataGridColumn } from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 import { Column } from '@devexpress/dx-react-grid';
 import { useMemo } from 'react';
+import { CierreCajaInDto } from '../models/CierreCajaInDto';
 
 export const ConfiguracionColumnasCierreCajas = () => {
 
-    const columns = useMemo<Column[]>(
+    const columns = useMemo<DataGridColumn<CierreCajaInDto>[] >(
         () => [
             {
                 name: 'nombrecaja',

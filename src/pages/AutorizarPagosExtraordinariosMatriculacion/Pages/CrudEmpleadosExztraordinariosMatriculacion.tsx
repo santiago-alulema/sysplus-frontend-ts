@@ -4,11 +4,11 @@ import { eliminarUsuario, habilitarUsuario, ObtenerUsuariosHabilitadosMatriculac
 import { useEffect, useState } from "react";
 import { UsuariosMatriculacion } from "../models/UsuariosMatriculacion";
 import { useLoading } from "@/componentesCommons/LoadingContext";
-import CustomDataGridTs from "@/componentesCommons/CustomDataGridTs";
 import { ConfiguracionColumnaMatriculaPAgoExtraordinario } from "../configs/ConfiguracionColumnaMatriculaPAgoExtraordinario";
 import { UsuariosHabilitadosInDto } from "../models/UsuariosHabilitadosInDto";
 import { IActionConfig } from "@/componentesCommons/IActionConfig";
 import DeleteIcon from '@mui/icons-material/Delete';
+import CustomDataGridTs from "@/componentesCommons/DataGridCommon/CustomDataGridTs";
 
 const CrudEmpleadosExtraordinariosMatriculacion = () => {
     const [gestores, setGestores] = useState<UsuariosMatriculacion[] | []>([]);

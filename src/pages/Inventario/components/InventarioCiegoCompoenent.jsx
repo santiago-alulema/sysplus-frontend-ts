@@ -20,6 +20,7 @@ import {
 import LocationBoxItem from './LocationBoxItem';
 
 import styles from '../css/InventarioComponent.module.css';
+import { useRef, useState } from 'react';
 
 const InventarioCiegoCompoenent = ({ inventario }) => {
 
@@ -64,6 +65,14 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
     setCantidadRevision
   } = inventario;
 
+  const [focusBusqueda, setFocusBusqueda] = useState(0);
+  const grabarItemRegresarReferencia = async () => {
+    const grabado = await grabarItem();
+    if (grabado) {
+      console.log("first")
+      setFocusBusqueda(prev => prev + 1);
+    }
+  };
   const estadosProducto =
     userLogin?.Parametros?.estados_unnoparts_inventario
       ? [
@@ -164,7 +173,7 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
           >
             {!existProduct ? (
               <DescripcionItem
-                key={counterComponent}
+                focusBusqueda={focusBusqueda}
                 organizations={organizations}
                 setOrganizations={setOrganizations}
                 setCodProducto={setCodProducto}
@@ -593,7 +602,7 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
         <Grid item xs={12} textAlign={'end'}>
           <Button
             variant="contained"
-            onClick={grabarItem}
+            onClick={grabarItemRegresarReferencia}
             sx={{
               borderRadius: 5,
               backgroundColor: '#1f6feb',

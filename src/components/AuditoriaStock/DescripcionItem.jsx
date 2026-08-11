@@ -23,6 +23,7 @@ const DescripcionItem = ({
   setOrganizations,
   setCodProducto,
   categoria = '',
+  focusBusqueda
 }) => {
   const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -99,6 +100,21 @@ const DescripcionItem = ({
     },
     [categoria, setOrganizations]
   );
+useEffect(() => {
+    if (focusBusqueda > 0) {
+        setSelectedOption(null);
+        setInputValue('');
+        setOpen(false);
+
+        setDescriptionProduct('');
+        setCodProducto('');
+        setOrganizations([]);
+
+        requestAnimationFrame(() => {
+            inputRef.current?.focus();
+        });
+    }
+}, [focusBusqueda]);
 
   const debouncedFetch = useMemo(() => {
     return debounce((texto) => {
@@ -274,51 +290,29 @@ const DescripcionItem = ({
         loadingText="Buscando..."
         noOptionsText="Sin resultados"
         renderInput={(params) => (
-          <TextField
-            sx={{
-              '& .MuiInputBase-root': {
-                minHeight: 38,
-                borderRadius: 2,
-                fontSize: 13,
-              },
-
-              '& .MuiInputBase-input': {
-                py: 0.8,
-                fontSize: 13,
-              },
-
-              '& .MuiInputLabel-root': {
-                fontSize: 13,
-              },
-
-              '& .MuiInputLabel-root.MuiInputLabel-shrink': {
-                fontSize: 12.5,
-              },
-
-              '& .MuiSvgIcon-root': {
-                fontSize: 19,
-              },
-            }}
-            size="small"
-            {...params}
-            inputRef={inputRef}
-            label="Buscar Descripción Producto"
-            onBlur={handleBlur}
-            onKeyDown={handleEnterSearch}
-            slotProps={{
-              input: {
+    <TextField
+        {...params}
+        inputRef={inputRef}
+        label="Buscar Descripción Producto"
+        onBlur={handleBlur}
+        onKeyDown={handleEnterSearch}
+        slotProps={{
+            input: {
                 ...params.InputProps,
                 type: 'search',
                 endAdornment: (
-                  <>
-                    {loading && <CircularProgress size={20} />}
-                    {params.InputProps.endAdornment}
-                  </>
+                    <>
+                        {loading && (
+                            <CircularProgress size={20} />
+                        )}
+
+                        {params.InputProps.endAdornment}
+                    </>
                 ),
-              },
-            }}
-          />
-        )}
+            },
+        }}
+    />
+)}
       />
     </Stack>
   );

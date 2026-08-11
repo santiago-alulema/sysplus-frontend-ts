@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { AnticiposPorLiquidarInDto } from '../models/AnticiposPorLiquidarInDto';
-import { DataGridColumn } from '@/componentesCommons/CustomDataGridTs';
+import { DataGridColumn } from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 
 export const AnticiposConfiguracionColumnas = () => {
     const columns = useMemo<

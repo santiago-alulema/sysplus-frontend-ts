@@ -1,9 +1,10 @@
 import { Column } from '@devexpress/dx-react-grid';
 import { useMemo } from 'react';
+import { UsuariosHabilitadosInDto } from '../models/UsuariosHabilitadosInDto';
+import { DataGridColumn } from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 
 export const ConfiguracionColumnaMatriculaPAgoExtraordinario = () => {
-
-    const columns = useMemo<Column[]>(
+    const columns = useMemo<DataGridColumn<UsuariosHabilitadosInDto>[]>(
         () => [
             {
                 name: 'usuario',

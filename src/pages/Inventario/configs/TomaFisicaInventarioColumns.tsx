@@ -6,12 +6,13 @@ import {
     Stack,
     Tooltip
 } from '@mui/material';
-
-
+import LoopIcon from '@mui/icons-material/Loop';
 import type {
     TomaFisicaInventario
 } from '../models/TomaFisicaInventarioModel';
-import { DataGridColumn } from '@/componentesCommons/CustomDataGridTs';
+import { DataGridColumn } from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import SubirReConteoInventario from '../components/SubirReConteoInventario';
 
 const formatearFecha = (
     fecha: string | null
@@ -61,7 +62,8 @@ const obtenerColorEstatus = (
 
 export const crearTomaFisicaInventarioColumns = (
     onEditar: (tomaFisica: TomaFisicaInventario) => void,
-
+    abrirSubirInventario: (tomaFisica: TomaFisicaInventario) => void,
+    abrirSubirReconteo: (tomaFisica: TomaFisicaInventario) => void
 ): DataGridColumn<TomaFisicaInventario>[] => [
         {
             name: 'nombre',
@@ -136,16 +138,29 @@ export const crearTomaFisicaInventarioColumns = (
                             <EditOutlinedIcon fontSize="small" />
                         </IconButton>
                     </Tooltip>
+                    {row.estatus === "A" && (
+                        <Tooltip title="Eliminar">
+                            <IconButton
+                                size="small"
+                                color="success"
+                                onClick={() => abrirSubirInventario(row)}
+                            >
+                                <DriveFolderUploadIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                    )}
+                    {row.estatus === "A" && (
+                        <Tooltip title="Re - Conteo">
+                            <IconButton
+                                size="small"
+                                color="success"
+                                onClick={() => abrirSubirReconteo(row)}
+                            >
+                                <LoopIcon fontSize="small" />
+                            </IconButton>
+                        </Tooltip>
+                    )}
 
-                    {/* <Tooltip title="Eliminar">
-                        <IconButton
-                            size="small"
-                            color="error"
-                            onClick={() => onEliminar(row)}
-                        >
-                            <DeleteOutlineIcon fontSize="small" />
-                        </IconButton>
-                    </Tooltip> */}
                 </Stack>
             )
         }

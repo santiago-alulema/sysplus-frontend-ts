@@ -29,9 +29,9 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
 
   const [ubicacion, setUbicacion] = useState({
     rac: null,
-  columna: null,
-  nivel: null,
-  posicion: null
+    columna: null,
+    nivel: null,
+    posicion: null
   });
 
   const cantidad = useMemo(() => {
@@ -196,7 +196,7 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
     setDescripcion('');
     setOrganizations([]);
     setCodProducto('');
-    setCounterComponent(new Date().getTime());
+    // setCounterComponent(new Date().getTime());
 
     setCantidadBuenEstado(0);
     setCantidadMalEstado(0);
@@ -212,7 +212,7 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
     setEstadoKit(0);
     setObservacionesKit('');
     setActivarObservacionesKit(true);
-setCantidadRevision(0);
+    setCantidadRevision(0);
     setUbicacion({
       rac: '',
       columna: '',
@@ -221,12 +221,44 @@ setCantidadRevision(0);
     });
   };
 
+  const InicializarDatosCambioProducto = () => {
+    setCodigoProducto('');
+    setDescripcion('');
+    setOrganizations([]);
+
+    setCantidadBuenEstado(0);
+    setCantidadMalEstado(0);
+
+    setExistProduct(false);
+    setEsSobrante(false);
+
+    setObservacion('');
+    setObservationSelection(0);
+    setHabilitarObservacion(true);
+
+    setIsKit(false);
+    setEstadoKit(0);
+    setObservacionesKit('');
+    setActivarObservacionesKit(true);
+    setCantidadRevision(0);
+    setUbicacion({
+      rac: '',
+      columna: '',
+      nivel: '',
+      posicion: ''
+    });
+  };
+
+  useEffect(() => {
+    InicializarDatosCambioProducto();
+  }, [codProducto])
+
   const grabarItem = async () => {
     const error = validarFormulario();
 
     if (error) {
       respuestaAlert('ERROR', error, 'error');
-      return;
+      return false;
     }
 
     try {
@@ -246,8 +278,7 @@ setCantidadRevision(0);
         '0',
         '0',
         '0',
-        `Observación: ${observacion} ; Observación KIT: ${
-          observacionesKit.trim() || 'SIN OBSERVACIONES'
+        `Observación: ${observacion} ; Observación KIT: ${observacionesKit.trim() || 'SIN OBSERVACIONES'
         }`,
         '0',
         String(parseInt(cantidad)),
@@ -270,12 +301,16 @@ setCantidadRevision(0);
       InicializarDatos();
 
       respuestaAlert('CORRECTO', resp, 'success');
+      return true;
+
     } catch (error) {
       respuestaAlert(
         'ERROR',
         error?.msg ?? 'Error al guardar el producto.',
         'error'
       );
+      return false;
+
     }
   };
 
@@ -339,7 +374,7 @@ setCantidadRevision(0);
 
     ubicacion,
     setUbicacion,
-    cantidadRevision, 
+    cantidadRevision,
     setCantidadRevision,
     estiloLaberBuenMalEstado,
     grabarItem

@@ -1,4 +1,4 @@
-import { DataGridColumn } from '@/componentesCommons/CustomDataGridTs';
+import { DataGridColumn } from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 import { EmpleadoInventario } from '@/pages/Inventario/models/EmpleadoInventarioModel';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 

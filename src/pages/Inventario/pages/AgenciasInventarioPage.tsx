@@ -18,7 +18,7 @@ import {
 import AgenciaFormDialog from '../components/AgenciaFormDialog';
 import { useAgencias } from '../hooks/useAgencias';
 import { crearAgenciaColumns } from '@/pages/Inventario/configs/agenciaColumns';
-import CustomDataGridTs from '@/componentesCommons/CustomDataGridTs';
+import CustomDataGridTs from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 
 const AgenciasInventarioPage = () => {
     const {
