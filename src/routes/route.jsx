@@ -100,6 +100,7 @@ import AgenciasInventarioPage from "@/pages/Inventario/pages/AgenciasInventarioP
 import TomaFisicaInventarioPage from "@/pages/Inventario/pages/TomaFisicaInventarioPage";
 import EmpleadosInventarioPage from "@/pages/Inventario/pages/EmpleadosInventarioPage";
 import ReporteProgresoPage from "@/pages/Inventario/pages/ReporteProgresoPage";
+import ReporteComprobantePorUsuario from "@/pages/Contabilidad/Pages/Comprobantes_Pagos/ReporteComprobantePorUsuario";
 
 export const routes = [
 
@@ -113,6 +114,8 @@ export const routes = [
   { path: "/subir-comprobantes", element: <ComprobantesPagosIndex /> },
   { path: "/reporte-comprobante-pagos", element: <ReporteComprobantePagoIndexs /> },
   { path: "/reporte-progresos-inventario", element: <ReporteProgresoPage /> },
+  { path: "/reporte-comprobante-por-usuario", element: <ReporteComprobantePorUsuario /> },
+
 
 
   { path: "/administracion-agencias-inventario", element: <AgenciasInventarioPage /> },

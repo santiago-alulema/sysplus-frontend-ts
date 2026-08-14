@@ -29,6 +29,12 @@ declare global {
         HTMLElement
       >;
 
+      "mf-reporte-usuario-comprobante": React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement>,
+        HTMLElement
+      >;
+      
+
       //matriculacion
 
       "mf-control-matriculacion": React.DetailedHTMLProps<

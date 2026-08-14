@@ -1,10 +1,10 @@
 import BasePage from '@/componentesCommons/BasePage'
 import { configureMicrofrontendAuth } from '@/CustomElements/auth/configureMicrofrontendAuth'
 
-const ReporteComprobantePagoIndexs = () => {
+const ReporteComprobantePorUsuario = () => {
   return (
     <>
-        <mf-reporte-comprobantes ref={configureMicrofrontendAuth}
+        <mf-reporte-usuario-comprobante ref={configureMicrofrontendAuth}
       style={{
         display: 'block',
         width: '100%',
@@ -14,5 +14,8 @@ const ReporteComprobantePagoIndexs = () => {
   )
 }
 
-export default ReporteComprobantePagoIndexs
+
+export default ReporteComprobantePorUsuario
+
+
 

@@ -3,14 +3,14 @@ import { configureMicrofrontendAuth } from '@/CustomElements/auth/configureMicro
 
 const ComprobantesPagosIndex = () => {
   return (
-    <BasePage>
+    <>
         <mf-subir-comprobantes ref={configureMicrofrontendAuth}
       style={{
         display: 'block',
         width: '100%',
         minHeight: '100%',
       }}/>
-    </BasePage>
+    </>
   )
 }
 
