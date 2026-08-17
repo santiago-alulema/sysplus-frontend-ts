@@ -1,6 +1,4 @@
-import {
-    useMemo
-} from 'react';
+import { useMemo } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -14,13 +12,18 @@ import {
     Typography
 } from '@mui/material';
 
+import CustomDataGridTs
+    from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 
-import AgenciaFormDialog from '../components/AgenciaFormDialog';
-import { useAgencias } from '../hooks/useAgencias';
-import { crearAgenciaColumns } from '@/pages/Inventario/configs/agenciaColumns';
-import CustomDataGridTs from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
+import { useAgenciasTomaFisicaInventario }
+    from '@/pages/Inventario/hooks/useAgenciasTomaFisicaInventarioHook';
+import { crearAgenciasTomaFisicaInventarioColumns } from '@/pages/Inventario/configs/agenciaColumns';
+import AgenciasTomaFisicaInventarioFormDialog from '@/pages/Inventario/components/AgenciaFormDialog';
 
-const AgenciasInventarioPage = () => {
+
+
+const AgenciasTomaFisicaInventarioPage = () => {
+
     const {
         agencias,
         empresas,
@@ -34,14 +37,14 @@ const AgenciasInventarioPage = () => {
         cerrarFormulario,
         guardarAgencia,
         cargarDatos
-    } = useAgencias();
+    } = useAgenciasTomaFisicaInventario();
 
     const columns = useMemo(
         () =>
-            crearAgenciaColumns(
+            crearAgenciasTomaFisicaInventarioColumns(
                 abrirEditar
             ),
-        [abrirEditar,]
+        [abrirEditar]
     );
 
     return (
@@ -68,7 +71,7 @@ const AgenciasInventarioPage = () => {
                         variant="body2"
                         color="text.secondary"
                     >
-                        Administración de agencias por empresa
+                        Administración de agencias para toma física de inventario
                     </Typography>
                 </Box>
 
@@ -93,10 +96,7 @@ const AgenciasInventarioPage = () => {
             </Stack>
 
             {error && (
-                <Alert
-                    severity="error"
-                    sx={{ mb: 2 }}
-                >
+                <Alert severity="error" sx={{ mb: 2 }}>
                     {error}
                 </Alert>
             )}
@@ -111,7 +111,7 @@ const AgenciasInventarioPage = () => {
                 </Box>
             ) : (
                 <CustomDataGridTs
-                    gridId="agencias-grid"
+                    gridId="agencias-toma-fisica-inventario-grid"
                     rows={agencias}
                     columns={columns}
                     getRowId={row => row.id}
@@ -125,7 +125,7 @@ const AgenciasInventarioPage = () => {
                 />
             )}
 
-            <AgenciaFormDialog
+            <AgenciasTomaFisicaInventarioFormDialog
                 open={formularioAbierto}
                 agencia={agenciaSeleccionada}
                 empresas={empresas}
@@ -137,4 +137,4 @@ const AgenciasInventarioPage = () => {
     );
 };
 
-export default AgenciasInventarioPage;
+export default AgenciasTomaFisicaInventarioPage;

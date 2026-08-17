@@ -3,9 +3,7 @@ import {
     useState
 } from 'react';
 
-import type {
-    FormEvent
-} from 'react';
+import type { FormEvent } from 'react';
 
 import {
     Box,
@@ -18,47 +16,56 @@ import {
     TextField
 } from '@mui/material';
 
+import CustomAutocompleteTs
+    from '@/componentesCommons/CustomAutocompleteTs';
 
 import type {
-    Agencia,
-    AgenciaFormData,
+    AgenciaTomaFisicaInventario,
+    AgenciaTomaFisicaInventarioFormData,
     EmpresaOption
-} from '../models/agencia.model';
-import CustomAutocompleteTs from '@/componentesCommons/CustomAutocompleteTs';
+} from '@/pages/Inventario/models/agenciasTomaFisicaInventario.model';
 
-interface AgenciaFormDialogProps {
+
+interface Props {
     open: boolean;
-    agencia: Agencia | null;
+    agencia: AgenciaTomaFisicaInventario | null;
     empresas: EmpresaOption[];
     guardando: boolean;
     onClose: () => void;
-    onGuardar: (data: AgenciaFormData) => Promise<void>;
+    onGuardar: (
+        data: AgenciaTomaFisicaInventarioFormData
+    ) => Promise<void>;
 }
 
-const FORMULARIO_INICIAL: AgenciaFormData = {
+
+const FORMULARIO_INICIAL: AgenciaTomaFisicaInventarioFormData = {
     nombre: '',
     descripcion: '',
     empresaId: ''
 };
 
-const AgenciaFormDialog = ({
+
+const AgenciasTomaFisicaInventarioFormDialog = ({
     open,
     agencia,
     empresas,
     guardando,
     onClose,
     onGuardar
-}: AgenciaFormDialogProps) => {
+}: Props) => {
+
     const [formulario, setFormulario] =
-        useState<AgenciaFormData>(FORMULARIO_INICIAL);
+        useState<AgenciaTomaFisicaInventarioFormData>(
+            FORMULARIO_INICIAL
+        );
 
     const [mostrarErrores, setMostrarErrores] =
         useState(false);
 
+
     useEffect(() => {
-        if (!open) {
+        if (!open)
             return;
-        }
 
         setFormulario({
             nombre: agencia?.nombre ?? '',
@@ -67,12 +74,15 @@ const AgenciaFormDialog = ({
         });
 
         setMostrarErrores(false);
+
     }, [open, agencia]);
+
 
     const empresaSeleccionada =
         empresas.find(
             empresa => empresa.id === formulario.empresaId
         ) ?? null;
+
 
     const nombreInvalido =
         mostrarErrores && !formulario.nombre.trim();
@@ -80,9 +90,11 @@ const AgenciaFormDialog = ({
     const empresaInvalida =
         mostrarErrores && !formulario.empresaId;
 
+
     const handleSubmit = async (
         event: FormEvent<HTMLFormElement>
     ): Promise<void> => {
+
         event.preventDefault();
 
         setMostrarErrores(true);
@@ -96,10 +108,11 @@ const AgenciaFormDialog = ({
 
         await onGuardar({
             nombre: formulario.nombre.trim(),
-            descripcion: formulario.descripcion.trim(),
+            descripcion: formulario.descripcion?.trim() ?? '',
             empresaId: formulario.empresaId
         });
     };
+
 
     return (
         <Dialog
@@ -113,17 +126,20 @@ const AgenciaFormDialog = ({
                 onSubmit={handleSubmit}
             >
                 <DialogTitle>
-                    {agencia ? 'Editar agencia' : 'Nueva agencia'}
+                    {agencia
+                        ? 'Editar agencia'
+                        : 'Nueva agencia'}
                 </DialogTitle>
 
                 <DialogContent dividers>
                     <Stack spacing={2}>
+
                         <TextField
                             label="Nombre"
                             value={formulario.nombre}
                             onChange={event =>
-                                setFormulario(current => ({
-                                    ...current,
+                                setFormulario(actual => ({
+                                    ...actual,
                                     nombre: event.target.value
                                 }))
                             }
@@ -142,8 +158,8 @@ const AgenciaFormDialog = ({
                             label="Descripción"
                             value={formulario.descripcion}
                             onChange={event =>
-                                setFormulario(current => ({
-                                    ...current,
+                                setFormulario(actual => ({
+                                    ...actual,
                                     descripcion: event.target.value
                                 }))
                             }
@@ -165,14 +181,15 @@ const AgenciaFormDialog = ({
                             errorField={empresaInvalida}
                             message="La empresa es obligatoria."
                             handleChange={(_, value) =>
-                                setFormulario(current => ({
-                                    ...current,
+                                setFormulario(actual => ({
+                                    ...actual,
                                     empresaId: value?.id
                                         ? String(value.id)
                                         : ''
                                 }))
                             }
                         />
+
                     </Stack>
                 </DialogContent>
 
@@ -189,7 +206,9 @@ const AgenciaFormDialog = ({
                         variant="contained"
                         disabled={guardando}
                     >
-                        {guardando ? 'Guardando...' : 'Guardar'}
+                        {guardando
+                            ? 'Guardando...'
+                            : 'Guardar'}
                     </Button>
                 </DialogActions>
             </Box>
@@ -197,4 +216,4 @@ const AgenciaFormDialog = ({
     );
 };
 
-export default AgenciaFormDialog;
+export default AgenciasTomaFisicaInventarioFormDialog;

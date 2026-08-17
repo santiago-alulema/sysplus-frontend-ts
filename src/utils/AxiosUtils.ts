@@ -1,12 +1,12 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 import { showAlert } from './modalAlerts';
 import { BASE_URL, BASE_URL_WHATSAPP_WEB } from './EnvUrl';
 import { Decrypt_User } from '@/services/Storage_Service';
 
 
 const api = (prefix = '', isUrlWhatApp = false) => {
-const user = Decrypt_User();
-console.log(user.Token);
+  const user = Decrypt_User();
+  console.log(user.Token);
 
   const instance = axios.create({
     baseURL: (isUrlWhatApp ? BASE_URL_WHATSAPP_WEB : BASE_URL) + `${prefix}`,

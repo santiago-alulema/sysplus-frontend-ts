@@ -101,6 +101,8 @@ import TomaFisicaInventarioPage from "@/pages/Inventario/pages/TomaFisicaInventa
 import EmpleadosInventarioPage from "@/pages/Inventario/pages/EmpleadosInventarioPage";
 import ReporteProgresoPage from "@/pages/Inventario/pages/ReporteProgresoPage";
 import ReporteComprobantePorUsuario from "@/pages/Contabilidad/Pages/Comprobantes_Pagos/ReporteComprobantePorUsuario";
+import AgenciaAuditoriaPage from "@/pages/Inventario/pages/AgenciaAuditoriaPage";
+import ReportesTomaFisicaPage from "@/pages/Inventario/pages/ReportesTomaFisicaPage";
 
 export const routes = [
 
@@ -115,6 +117,10 @@ export const routes = [
   { path: "/reporte-comprobante-pagos", element: <ReporteComprobantePagoIndexs /> },
   { path: "/reporte-progresos-inventario", element: <ReporteProgresoPage /> },
   { path: "/reporte-comprobante-por-usuario", element: <ReporteComprobantePorUsuario /> },
+  { path: "/auditoria-agencia-empleados", element: <AgenciaAuditoriaPage /> },
+  { path: "/reporte-toma-fisica-empresas-nuevas", element: <ReportesTomaFisicaPage /> },
+
+
 
 
 

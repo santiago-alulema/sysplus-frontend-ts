@@ -6,15 +6,18 @@ import {
     Tooltip
 } from '@mui/material';
 
+import type { DataGridColumn }
+    from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
 
-import type {
-    Agencia
-} from '../models/agencia.model';
-import { DataGridColumn } from '@/componentesCommons/DataGridCommon/CustomDataGridTs';
+import type { AgenciaTomaFisicaInventario }
+    from '@/pages/Inventario/models/agenciasTomaFisicaInventario.model';
 
-export const crearAgenciaColumns = (
-    onEditar: (agencia: Agencia) => void,
-): DataGridColumn<Agencia>[] => [
+
+export const crearAgenciasTomaFisicaInventarioColumns = (
+    onEditar: (
+        agencia: AgenciaTomaFisicaInventario
+    ) => void
+): DataGridColumn<AgenciaTomaFisicaInventario>[] => [
         {
             name: 'nombre',
             title: 'Agencia',
@@ -26,15 +29,16 @@ export const crearAgenciaColumns = (
             title: 'Descripción',
             width: '35%',
             dataType: 'text',
-            getCellValue: row => row.descripcion ?? ''
+            getCellValue: row =>
+                row.descripcion ?? ''
         },
         {
-            name: 'empresaNombre',
+            name: 'empresa',
             title: 'Empresa',
             width: '25%',
             dataType: 'text',
             getCellValue: row =>
-                row.empresaNombre ?? 'Sin empresa'
+                row.empresa?.empresa ?? 'Sin empresa'
         },
         {
             name: 'acciones',
@@ -58,16 +62,6 @@ export const crearAgenciaColumns = (
                             <EditOutlinedIcon fontSize="small" />
                         </IconButton>
                     </Tooltip>
-
-                    {/* <Tooltip title="Eliminar">
-                        <IconButton
-                            size="small"
-                            color="error"
-                            onClick={() => onEliminar(row)}
-                        >
-                            <DeleteOutlineIcon fontSize="small" />
-                        </IconButton>
-                    </Tooltip> */}
                 </Stack>
             )
         }
