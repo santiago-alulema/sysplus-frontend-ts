@@ -5,13 +5,13 @@ import UploadExcel from "@/componentesCommons/UploadExcel"
 import { InventarioCrearOpenBravoOutDto } from "../models/InventarioCrearOpenBravoOutDto"
 import { grabarNuevoInventarioServicioWeb } from "../services/TomaFisicaInventarioService"
 import { useLoading } from "@/componentesCommons/LoadingContext"
+import { showAlert } from "@/utils/modalAlerts"
 
 interface TomaFisicaInventarioProps {
   inventario?: TomaFisicaInventario
 }
 
 const SubirInventarioModal = ({ inventario }: TomaFisicaInventarioProps) => {
-
   const { startLoading, stopLoading } = useLoading();
   const subirExcelInventario = async (items: any[]) => {
     try {
@@ -44,8 +44,12 @@ const SubirInventarioModal = ({ inventario }: TomaFisicaInventarioProps) => {
         posicion: item["posicion"],
         empresaId: inventario?.empresaId,
       }));
-
       await grabarNuevoInventarioServicioWeb(data);
+      showAlert({
+        title: "Correcto",
+        message: "El inventario se subio correctamente",
+        type: "success"
+      })
     } finally {
       stopLoading();
     }

@@ -4,7 +4,7 @@ import React from 'react'
 
 const ReportesTomaFisicaPage = () => {
     return (
-        <BasePage title='Seleccione la empresa y la toma física para generar los reportes.'>
+        <BasePage title='REPORTE TOMA FISICA'>
             <ReportesAuditoriaEmpresasComponent />
         </BasePage>
     )

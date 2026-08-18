@@ -38,7 +38,7 @@ export const crearAgenciasTomaFisicaInventarioColumns = (
             width: '25%',
             dataType: 'text',
             getCellValue: row =>
-                row.empresa?.empresa ?? 'Sin empresa'
+                row.empresa?.nombre ?? 'Sin empresa'
         },
         {
             name: 'acciones',

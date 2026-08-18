@@ -199,38 +199,43 @@ useEffect(() => {
     }
   };
 
-  const handleEnterSearch = async (event) => {
-    if (event.key !== 'Enter') {
-      return;
-    }
+const handleEnterSearch = async (event) => {
+  if (event.key !== 'Enter') {
+    return;
+  }
 
-    if (open && options.length === 1) {
-      event.preventDefault();
-      event.stopPropagation();
-
-      handleSelect(event, options[0]);
-      return;
-    }
-
-    if (open && options.length > 1) {
-      return;
-    }
-
-    const texto = event.currentTarget.value.trim();
-
-    if (!texto) {
-      setOrganizations([]);
-      setOpen(false);
-      return;
-    }
-
+  if (open && options.length === 1) {
     event.preventDefault();
     event.stopPropagation();
 
-    debouncedFetch.cancel();
+    handleSelect(event, options[0]);
+    return;
+  }
 
-    await buscarProductos(texto);
-  };
+  if (open && options.length > 1) {
+    return;
+  }
+
+  const texto = event.currentTarget.value.trim();
+
+  if (!texto) {
+    setOrganizations([]);
+    setOpen(false);
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  debouncedFetch.cancel();
+
+  const resultados = await buscarProductos(texto);
+
+  // SOLO agregamos esto
+  if (resultados?.length > 0) {
+    setDescriptionProduct(resultados[0].name ?? '');
+  }
+};
 
   const handleBlur = () => {
     if (!selectedOption && !inputValue.trim()) {

@@ -19,6 +19,7 @@ import CustomDataGridTs from '@/componentesCommons/DataGridCommon/CustomDataGrid
 import CustomModalTs from '@/componentesCommons/CustomModalTs';
 import SubirInventarioModal from '../components/SubirInventarioModal';
 import SubirReConteoInventario from '../components/SubirReConteoInventario';
+import BasePage from '@/componentesCommons/BasePage';
 
 const TomaFisicaInventarioPage = () => {
     const {
@@ -49,6 +50,7 @@ const TomaFisicaInventarioPage = () => {
     );
 
     return (
+       <BasePage title='Tomas físicas de inventario'>
         <Box sx={{ p: 2 }}>
             <Stack
                 direction={{
@@ -64,12 +66,6 @@ const TomaFisicaInventarioPage = () => {
                 mb={2}
             >
                 <Box>
-                    <Typography
-                        variant="h5"
-                        fontWeight={600}
-                    >
-                        Tomas físicas de inventario
-                    </Typography>
 
                     <Typography
                         variant="body2"
@@ -149,6 +145,7 @@ const TomaFisicaInventarioPage = () => {
                 <SubirReConteoInventario inventario={tomaFisicaSeleccionada ?? undefined} cerrarModal={setAbrirModalSubirReconteo} />
             </CustomModalTs>
         </Box>
+       </BasePage>
     );
 };
 

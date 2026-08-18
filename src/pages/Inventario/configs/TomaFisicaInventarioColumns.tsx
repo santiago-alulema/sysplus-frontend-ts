@@ -139,7 +139,7 @@ export const crearTomaFisicaInventarioColumns = (
                         </IconButton>
                     </Tooltip>
                     {row.estatus === "A" && (
-                        <Tooltip title="Eliminar">
+                        <Tooltip title="Subir Inventario">
                             <IconButton
                                 size="small"
                                 color="success"
@@ -150,7 +150,7 @@ export const crearTomaFisicaInventarioColumns = (
                         </Tooltip>
                     )}
                     {row.estatus === "A" && (
-                        <Tooltip title="Re - Conteo">
+                        <Tooltip title="Subir Re-Conteo">
                             <IconButton
                                 size="small"
                                 color="success"

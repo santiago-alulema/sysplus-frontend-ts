@@ -26,10 +26,11 @@ import {
 } from '../services/agencia-auditoria.service';
 
 import {
-    descargarReporteCortesServicioWeb,
+    descargarReporteDiarioExcelServicioWeb,
     descargarReporteDiarioServicioWeb,
     descargarReporteFinalExcelServicioWeb,
-    descargarReporteFinalPdfServicioWeb
+    descargarReporteFinalPdfServicioWeb,
+    descargarReportesPorUsuariosServicioWeb
 } from '@/pages/Inventario/services/ReportesServiciosWeb';
 
 import { useLoading } from '@/componentesCommons/LoadingContext';
@@ -40,14 +41,10 @@ const ReportesAuditoriaEmpresasComponent = () => {
 
     const [empresas, setEmpresas] = useState<OpcionInventario[]>([]);
     const [tomasFisicas, setTomasFisicas] = useState<OpcionInventario[]>([]);
-
     const [empresaId, setEmpresaId] = useState('');
     const [tomaFisicaInventarioId, setTomaFisicaInventarioId] = useState('');
-
     const [cargandoTomas, setCargandoTomas] = useState(false);
-
     const { startLoading, stopLoading } = useLoading();
-
 
     useEffect(() => {
         obtenerEmpresas().then(setEmpresas);
@@ -78,78 +75,33 @@ const ReportesAuditoriaEmpresasComponent = () => {
         }
     };
 
-
-    const reporteDiarioConCorte = async () => {
-
-        const ahora = new Date();
-
-        const horaActual =
-            ahora.getHours() * 60 +
-            ahora.getMinutes();
-
-        let corte: number;
-
-        if (
-            horaActual >= 8 * 60 &&
-            horaActual <= 14 * 60
-        ) {
-            corte = 1;
-        }
-        else if (
-            horaActual >= (14 * 60) + 1 &&
-            horaActual <= 19 * 60
-        ) {
-            corte = 2;
-        }
-        else {
-
-            showAlert({
-                title: "Advertencia",
-                type: "warning",
-                message: "Fuera del horario de cortes."
-            });
-
-            return false;
-        }
-
-        await descargarReporteCortesServicioWeb(
-            empresaId,
-            tomaFisicaInventarioId,
-            corte
-        );
-
-        return true;
-    };
-
-
-    /*
-     * CONFIGURACIÓN DE REPORTES
-     *
-     * Para agregar otro reporte solamente
-     * tienes que agregar otro objeto.
-     */
     const reportes = [
         {
-            titulo: 'Reporte diario por corte',
-            descripcion: 'Genera el reporte correspondiente al corte actual.',
+            titulo: 'Reporte inventario diario por usuarios',
+            descripcion: 'Genera el reporte correspondiente a usuarios',
             formato: 'PDF',
             icono: <PictureAsPdfOutlinedIcon />,
             color: '#d32f2f',
             fondo: '#fff5f5',
-            servicio: reporteDiarioConCorte
+            servicio: () => descargarReportesPorUsuariosServicioWeb(empresaId,tomaFisicaInventarioId)
         },
         {
-            titulo: 'Reporte diario responsables',
+            titulo: 'Reporte total diario (PDF)',
             descripcion: 'Detalle diario de responsables de toma física.',
             formato: 'PDF',
             icono: <PictureAsPdfOutlinedIcon />,
             color: '#d32f2f',
             fondo: '#fff5f5',
-            servicio: () =>
-                descargarReporteDiarioServicioWeb(
-                    empresaId,
-                    tomaFisicaInventarioId
-                )
+            servicio: () => descargarReporteDiarioServicioWeb(empresaId,tomaFisicaInventarioId)
+        },
+        {
+            titulo: 'Reporte total diario (EXCEL)',
+            descripcion: 'Detalle diario de responsables de toma física.',
+            formato: 'EXCEL',
+            icono: <TableViewOutlinedIcon />,
+            color: '#2e7d32',
+            fondo: '#fff5f5',
+            servicio: () => descargarReporteDiarioExcelServicioWeb(empresaId,tomaFisicaInventarioId)
         },
         {
             titulo: 'Reporte final',
@@ -158,11 +110,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             icono: <TableViewOutlinedIcon />,
             color: '#2e7d32',
             fondo: '#f3faf4',
-            servicio: () =>
-                descargarReporteFinalExcelServicioWeb(
-                    empresaId,
-                    tomaFisicaInventarioId
-                )
+            servicio: () =>descargarReporteFinalExcelServicioWeb(empresaId,tomaFisicaInventarioId)
         },
         {
             titulo: 'Reporte final',
@@ -171,11 +119,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             icono: <PictureAsPdfOutlinedIcon />,
             color: '#d32f2f',
             fondo: '#fff5f5',
-            servicio: () =>
-                descargarReporteFinalPdfServicioWeb(
-                    empresaId,
-                    tomaFisicaInventarioId
-                )
+            servicio: () =>descargarReporteFinalPdfServicioWeb(empresaId,tomaFisicaInventarioId)
         },
         {
             titulo: 'Reporte diario',
@@ -184,13 +128,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             icono: <PictureAsPdfOutlinedIcon />,
             color: '#d32f2f',
             fondo: '#fff5f5',
-
-            // Actualmente en tu código utiliza este servicio.
-            servicio: () =>
-                descargarReporteFinalPdfServicioWeb(
-                    empresaId,
-                    tomaFisicaInventarioId
-                )
+            servicio: () =>descargarReporteFinalPdfServicioWeb(empresaId,tomaFisicaInventarioId )
         },
         {
             titulo: 'Reporte diario',
@@ -199,30 +137,17 @@ const ReportesAuditoriaEmpresasComponent = () => {
             icono: <TableViewOutlinedIcon />,
             color: '#2e7d32',
             fondo: '#f3faf4',
-
-            // Actualmente en tu código utiliza este servicio.
-            servicio: () =>
-                descargarReporteFinalExcelServicioWeb(
-                    empresaId,
-                    tomaFisicaInventarioId
-                )
+            servicio: () =>descargarReporteFinalExcelServicioWeb(empresaId,tomaFisicaInventarioId)
         }
     ];
 
 
-    const ejecutarReporte = async (
-        servicio: () => Promise<any>
-    ) => {
-
+    const ejecutarReporte = async (servicio: () => Promise<any> ) => {
         startLoading();
-
         try {
-
             const resultado = await servicio();
-
             if (resultado === false)
                 return;
-
             showAlert({
                 title: 'Correcto',
                 type: 'success',
@@ -253,7 +178,6 @@ const ReportesAuditoriaEmpresasComponent = () => {
     return (
 
         <Box>
-
             <Stack spacing={3}>
                 <Paper
                     variant="outlined"

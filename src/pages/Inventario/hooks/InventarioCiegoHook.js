@@ -162,28 +162,19 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
       userLogin?.Parametros?.tiene_localizacion_items_inventario ?? false;
 
     if (validarUbicacion) {
-      if (ubicacion.rac.trim().length === 0 || ubicacion.rac.trim() === '0') {
+      if (ubicacion.rac.trim().length === 0 ) {
         return 'Debe ingresar un <strong>RAC</strong> válido.';
       }
 
-      if (
-        ubicacion.columna.trim().length === 0 ||
-        ubicacion.columna.trim() === '0'
-      ) {
+      if (ubicacion.columna.trim().length === 0 ) {
         return 'Debe ingresar una <strong>COLUMNA</strong> válida.';
       }
 
-      if (
-        ubicacion.nivel.trim().length === 0 ||
-        ubicacion.nivel.trim() === '0'
-      ) {
+      if (ubicacion.nivel.trim().length === 0) {
         return 'Debe ingresar un <strong>NIVEL</strong> válido.';
       }
 
-      if (
-        ubicacion.posicion.trim().length === 0 ||
-        ubicacion.posicion.trim() === '0'
-      ) {
+      if (ubicacion.posicion.trim().length === 0) {
         return 'Debe ingresar una <strong>POSICIÓN</strong> válida.';
       }
     }
@@ -222,32 +213,34 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
   };
 
   const InicializarDatosCambioProducto = () => {
-    setCodigoProducto('');
-    setDescripcion('');
-    setOrganizations([]);
+  setCodigoProducto('');
+  // NO borrar descripcion
+  setOrganizations([]);
 
-    setCantidadBuenEstado(0);
-    setCantidadMalEstado(0);
+  setCantidadBuenEstado(0);
+  setCantidadMalEstado(0);
 
-    setExistProduct(false);
-    setEsSobrante(false);
+  setExistProduct(false);
+  setEsSobrante(false);
 
-    setObservacion('');
-    setObservationSelection(0);
-    setHabilitarObservacion(true);
+  setObservacion('');
+  setObservationSelection(0);
+  setHabilitarObservacion(true);
 
-    setIsKit(false);
-    setEstadoKit(0);
-    setObservacionesKit('');
-    setActivarObservacionesKit(true);
-    setCantidadRevision(0);
-    setUbicacion({
-      rac: '',
-      columna: '',
-      nivel: '',
-      posicion: ''
-    });
-  };
+  setIsKit(false);
+  setEstadoKit(0);
+  setObservacionesKit('');
+  setActivarObservacionesKit(true);
+
+  setCantidadRevision(0);
+
+  setUbicacion({
+    rac: '',
+    columna: '',
+    nivel: '',
+    posicion: ''
+  });
+};
 
   useEffect(() => {
     InicializarDatosCambioProducto();
@@ -262,6 +255,11 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
     }
 
     try {
+
+      console.log("codProducto", codProducto)
+      console.log("codigoProducto", codigoProducto)
+      console.log("descripcion", descripcion)
+
       const tomaFisicaProducto = new TomaFisicaProducto(
         !existProduct ? codProducto : codigoProducto,
         descripcion.replace("'", ''),

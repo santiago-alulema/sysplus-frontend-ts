@@ -85,7 +85,6 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
       : [
         { value: 'CADUCADO', label: 'Caducado' },
         { value: 'DAÑADO', label: 'Dañado' },
-        { value: 'REVISION', label: 'Revisión' }
       ];
 
   return (
