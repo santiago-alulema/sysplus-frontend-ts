@@ -38,7 +38,6 @@ import { showAlert } from '@/utils/modalAlerts';
 
 
 const ReportesAuditoriaEmpresasComponent = () => {
-
     const [empresas, setEmpresas] = useState<OpcionInventario[]>([]);
     const [tomasFisicas, setTomasFisicas] = useState<OpcionInventario[]>([]);
     const [empresaId, setEmpresaId] = useState('');
@@ -77,7 +76,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
 
     const reportes = [
         {
-            titulo: 'Reporte inventario diario por usuarios',
+            titulo: 'Reporte diario por grupo',
             descripcion: 'Genera el reporte correspondiente a usuarios',
             formato: 'PDF',
             icono: <PictureAsPdfOutlinedIcon />,
@@ -86,7 +85,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             servicio: () => descargarReportesPorUsuariosServicioWeb(empresaId,tomaFisicaInventarioId)
         },
         {
-            titulo: 'Reporte total diario (PDF)',
+            titulo: 'Reporte consolidado por dia (PDF)',
             descripcion: 'Detalle diario de responsables de toma física.',
             formato: 'PDF',
             icono: <PictureAsPdfOutlinedIcon />,
@@ -95,7 +94,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             servicio: () => descargarReporteDiarioServicioWeb(empresaId,tomaFisicaInventarioId)
         },
         {
-            titulo: 'Reporte total diario (EXCEL)',
+            titulo: 'Reporte consolidado por dia (EXCEL)',
             descripcion: 'Detalle diario de responsables de toma física.',
             formato: 'EXCEL',
             icono: <TableViewOutlinedIcon />,
@@ -104,7 +103,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             servicio: () => descargarReporteDiarioExcelServicioWeb(empresaId,tomaFisicaInventarioId)
         },
         {
-            titulo: 'Reporte final',
+            titulo: 'Reporte final al cierre de la toma fisica (EXCEL)',
             descripcion: 'Reporte consolidado final del inventario.',
             formato: 'EXCEL',
             icono: <TableViewOutlinedIcon />,
@@ -113,7 +112,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             servicio: () =>descargarReporteFinalExcelServicioWeb(empresaId,tomaFisicaInventarioId)
         },
         {
-            titulo: 'Reporte final',
+            titulo: 'Reporte final al cierre de la toma fisica (PDF)',
             descripcion: 'Reporte consolidado final del inventario.',
             formato: 'PDF',
             icono: <PictureAsPdfOutlinedIcon />,
@@ -121,24 +120,24 @@ const ReportesAuditoriaEmpresasComponent = () => {
             fondo: '#fff5f5',
             servicio: () =>descargarReporteFinalPdfServicioWeb(empresaId,tomaFisicaInventarioId)
         },
-        {
-            titulo: 'Reporte diario',
-            descripcion: 'Reporte general diario de la toma física.',
-            formato: 'PDF',
-            icono: <PictureAsPdfOutlinedIcon />,
-            color: '#d32f2f',
-            fondo: '#fff5f5',
-            servicio: () =>descargarReporteFinalPdfServicioWeb(empresaId,tomaFisicaInventarioId )
-        },
-        {
-            titulo: 'Reporte diario',
-            descripcion: 'Reporte general diario de la toma física.',
-            formato: 'EXCEL',
-            icono: <TableViewOutlinedIcon />,
-            color: '#2e7d32',
-            fondo: '#f3faf4',
-            servicio: () =>descargarReporteFinalExcelServicioWeb(empresaId,tomaFisicaInventarioId)
-        }
+        // {
+        //     titulo: 'Reporte diario',
+        //     descripcion: 'Reporte general diario de la toma física.',
+        //     formato: 'PDF',
+        //     icono: <PictureAsPdfOutlinedIcon />,
+        //     color: '#d32f2f',
+        //     fondo: '#fff5f5',
+        //     servicio: () =>descargarReporteFinalPdfServicioWeb(empresaId,tomaFisicaInventarioId )
+        // },
+        // {
+        //     titulo: 'Reporte diario',
+        //     descripcion: 'Reporte general diario de la toma física.',
+        //     formato: 'EXCEL',
+        //     icono: <TableViewOutlinedIcon />,
+        //     color: '#2e7d32',
+        //     fondo: '#f3faf4',
+        //     servicio: () =>descargarReporteFinalExcelServicioWeb(empresaId,tomaFisicaInventarioId)
+        // }
     ];
 
 

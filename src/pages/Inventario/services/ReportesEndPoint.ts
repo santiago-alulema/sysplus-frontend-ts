@@ -4,6 +4,8 @@ export const ReportesEndPoint = {
     DESCARGAR_REPORTE_DIARIOS_EXCEL: 'ReporteInventarioUnnoCycle/descargar-reporte-diario-completo-excel',
     DESCARGAR_REPORTE_FINAL_EXCEL: 'ReporteInventarioUnnoCycle/descargar-excel-reporte-final',
     DESCARGAR_REPORTE_FINAL_PDF: 'ReporteInventarioUnnoCycle/descargar-reporte-final-pdf',
+    DESCARGAR_REPORTE_FINAL_DIARIO_EXCEL: 'ReporteInventarioUnnoCycle/descargar-excel-reporte-final',
+    DESCARGAR_REPORTE_FINAL_DIARIO_PDF: 'ReporteInventarioUnnoCycle/descargar-reporte-final-pdf',
     DESCARGAR_REPORTE_DIARIO_EXCEL: 'ReporteInventarioUnnoCycle/descargar-reporte-diario-excel',
     DESCARGAR_REPORTE_DIARIO_PDF: 'ReporteInventarioUnnoCycle/descargar-reporte-diario-pdf',
 }
