@@ -8,4 +8,7 @@ export const ReportesEndPoint = {
     DESCARGAR_REPORTE_FINAL_DIARIO_PDF: 'ReporteInventarioUnnoCycle/descargar-reporte-final-pdf',
     DESCARGAR_REPORTE_DIARIO_EXCEL: 'ReporteInventarioUnnoCycle/descargar-reporte-diario-excel',
     DESCARGAR_REPORTE_DIARIO_PDF: 'ReporteInventarioUnnoCycle/descargar-reporte-diario-pdf',
+    DESCARGAR_REPORTE_PARA_SUBIR_RECONTEO: 'ReconteoInventario/descargar-reporte-para-reconteo',
+    DESCARGAR_ACTA_FIRMAS: 'ReporteInventarioUnnoCycle/descargar-acta-entrega',
+
 }

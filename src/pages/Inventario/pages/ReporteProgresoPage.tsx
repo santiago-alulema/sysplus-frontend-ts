@@ -9,27 +9,34 @@ import {
   CardHeader,
   Container,
   Divider,
+  Paper,
   Stack,
   Typography,
 } from "@mui/material";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { ProgresoInventarioOutDto } from "../models/reporte-progreso.model";
 import { obtenerReporteProgresoServicioWeb } from "../services/ProgresoInventarioServicioWeb";
+import EmpresaAutocompleteComponent from "@/pages/Inventario/components/EmpresaAutocompleteComponent";
+import TomaFisicaAutocompleteComponent from "@/pages/Inventario/components/TomaFisicaAutocompleteComponent";
 
 const ReporteProgresoPage = () => {
-  const [progresoInventario, setProgresoInventario] =
-    useState<ProgresoInventarioOutDto | null>(null);
-
+  const [progresoInventario, setProgresoInventario] = useState<ProgresoInventarioOutDto | null>(null);
+  const [empresaId, setEmpresaId] = useState('');
+  const [tomaFisicaInventarioId, setTomaFisicaInventarioId] = useState('');
   const { startLoading, stopLoading } = useLoading();
 
-  const obtenerReporteProgresoInventario = async () => {
+  const obtenerReporteProgresoInventario = useCallback(async () => {
     try {
       startLoading();
 
-      const respuesta = await obtenerReporteProgresoServicioWeb();
+      const respuesta = await obtenerReporteProgresoServicioWeb(
+        empresaId,
+        tomaFisicaInventarioId
+      );
 
       setProgresoInventario(respuesta);
+
     } catch (error) {
       console.error(
         "Error al obtener el reporte de progreso del inventario:",
@@ -38,14 +45,53 @@ const ReporteProgresoPage = () => {
     } finally {
       stopLoading();
     }
-  };
+  }, [
+    empresaId,
+    tomaFisicaInventarioId,
+    startLoading,
+    stopLoading
+  ]);
 
   useEffect(() => {
-    void obtenerReporteProgresoInventario();
-  }, []);
+    if (empresaId && tomaFisicaInventarioId)
+      obtenerReporteProgresoInventario();
+  }, [tomaFisicaInventarioId]);
 
   return (
     <BasePage title="Reporte de progreso inventario">
+      <Paper
+        variant="outlined"
+        sx={{
+          p: 2.5,
+          borderRadius: 3
+        }}
+      >
+
+        <Stack
+          direction={{
+            xs: 'column',
+            md: 'row'
+          }}
+          spacing={2}
+        >
+
+          <EmpresaAutocompleteComponent
+            value={empresaId}
+            onChange={id => {
+              setEmpresaId(id);
+              setTomaFisicaInventarioId('');
+            }}
+          />
+
+          <TomaFisicaAutocompleteComponent
+            empresaId={empresaId}
+            value={tomaFisicaInventarioId}
+            onChange={setTomaFisicaInventarioId}
+          />
+
+        </Stack>
+
+      </Paper>
       {progresoInventario && (
         <Container
           maxWidth="lg"
@@ -110,9 +156,8 @@ const ReporteProgresoPage = () => {
               >
                 <CardHeader
                   title={`Fecha: ${item.fecha}`}
-                  subheader={`${item.progresoGrupo.length} responsable${
-                    item.progresoGrupo.length === 1 ? "" : "s"
-                  }`}
+                  subheader={`${item.progresoGrupo.length} responsable${item.progresoGrupo.length === 1 ? "" : "s"
+                    }`}
                   titleTypographyProps={{
                     sx: {
                       color: "text.primary",

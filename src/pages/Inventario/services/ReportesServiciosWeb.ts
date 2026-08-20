@@ -51,3 +51,24 @@ export const descargarReporteFinalExcelServicioWeb = (empresId: string, tomaFisi
         undefined,
         true
     );
+
+
+export const descargarReporteParaReconteoServicioWeb = (tomaFisicaId: string) =>
+    request<string>(
+        'get',
+        `${ReportesEndPoint.DESCARGAR_REPORTE_PARA_SUBIR_RECONTEO}/${tomaFisicaId}`,
+        undefined,
+        undefined,
+        true
+    );
+
+export const descargarActaInvetarioServicioWeb = (tomaFisicaId: string) =>
+    request<string>(
+        'get',
+        `${ReportesEndPoint.DESCARGAR_ACTA_FIRMAS}/${tomaFisicaId}`,
+        undefined,
+        undefined,
+        true
+    );
+
+

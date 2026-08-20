@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material"
 import { TomaFisicaInventario } from "../models/TomaFisicaInventarioModel"
-import UploadExcelDinamico from "@/components/UploadExcelDinamico"
 import UploadExcel from "@/componentesCommons/UploadExcel"
 import { InventarioCrearOpenBravoOutDto } from "../models/InventarioCrearOpenBravoOutDto"
 import { grabarNuevoInventarioServicioWeb } from "../services/TomaFisicaInventarioService"

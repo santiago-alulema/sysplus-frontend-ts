@@ -10,7 +10,6 @@ import AgenciaAuditoriaEndPoint from '@/pages/Inventario/services/AgenciaAuditor
 
 
 export const obtenerEmpresas = () => {
-
     return request<OpcionInventario[]>(
         'get',
         AgenciaAuditoriaEndPoint.OBTENER_EMPRESAS

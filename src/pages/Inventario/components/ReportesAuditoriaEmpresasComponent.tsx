@@ -1,48 +1,45 @@
 import {
-    Autocomplete,
     Box,
     Button,
     Chip,
-    CircularProgress,
     Paper,
     Stack,
-    TextField,
     Typography
 } from '@mui/material';
 
-import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined';
-import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
 import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import TableViewOutlinedIcon from '@mui/icons-material/TableViewOutlined';
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
-
+import RestoreIcon from '@mui/icons-material/Restore';
 import { useEffect, useState } from 'react';
 
 import type { OpcionInventario } from '../models/AgenciaAuditoria';
 
 import {
     obtenerEmpresas,
-    obtenerTomasFisicas
+    // obtenerTomasFisicas
 } from '../services/agencia-auditoria.service';
 
 import {
+    descargarActaInvetarioServicioWeb,
     descargarReporteDiarioExcelServicioWeb,
     descargarReporteDiarioServicioWeb,
     descargarReporteFinalExcelServicioWeb,
     descargarReporteFinalPdfServicioWeb,
+    descargarReporteParaReconteoServicioWeb,
     descargarReportesPorUsuariosServicioWeb
 } from '@/pages/Inventario/services/ReportesServiciosWeb';
 
 import { useLoading } from '@/componentesCommons/LoadingContext';
 import { showAlert } from '@/utils/modalAlerts';
+import EmpresaAutocompleteComponent from '@/pages/Inventario/components/EmpresaAutocompleteComponent';
+import TomaFisicaAutocompleteComponent from '@/pages/Inventario/components/TomaFisicaAutocompleteComponent';
 
 
 const ReportesAuditoriaEmpresasComponent = () => {
-    const [empresas, setEmpresas] = useState<OpcionInventario[]>([]);
-    const [tomasFisicas, setTomasFisicas] = useState<OpcionInventario[]>([]);
+    const [, setEmpresas] = useState<OpcionInventario[]>([]);
     const [empresaId, setEmpresaId] = useState('');
     const [tomaFisicaInventarioId, setTomaFisicaInventarioId] = useState('');
-    const [cargandoTomas, setCargandoTomas] = useState(false);
     const { startLoading, stopLoading } = useLoading();
 
     useEffect(() => {
@@ -50,29 +47,29 @@ const ReportesAuditoriaEmpresasComponent = () => {
     }, []);
 
 
-    const cambiarEmpresa = async (
-        empresa: OpcionInventario | null
-    ) => {
+    // const cambiarEmpresa = async (
+    //     empresa: OpcionInventario | null
+    // ) => {
 
-        const id = empresa?.id ?? '';
+    //     const id = empresa?.id ?? '';
 
-        setEmpresaId(id);
-        setTomaFisicaInventarioId('');
-        setTomasFisicas([]);
+    //     setEmpresaId(id);
+    //     setTomaFisicaInventarioId('');
+    //     setTomasFisicas([]);
 
-        if (!id)
-            return;
+    //     if (!id)
+    //         return;
 
-        setCargandoTomas(true);
+    //     setCargandoTomas(true);
 
-        try {
-            const response = await obtenerTomasFisicas(id);
-            setTomasFisicas(response);
-        }
-        finally {
-            setCargandoTomas(false);
-        }
-    };
+    //     try {
+    //         const response = await obtenerTomasFisicas(id);
+    //         setTomasFisicas(response);
+    //     }
+    //     finally {
+    //         setCargandoTomas(false);
+    //     }
+    // };
 
     const reportes = [
         {
@@ -82,7 +79,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             icono: <PictureAsPdfOutlinedIcon />,
             color: '#d32f2f',
             fondo: '#fff5f5',
-            servicio: () => descargarReportesPorUsuariosServicioWeb(empresaId,tomaFisicaInventarioId)
+            servicio: () => descargarReportesPorUsuariosServicioWeb(empresaId, tomaFisicaInventarioId)
         },
         {
             titulo: 'Reporte consolidado por dia (PDF)',
@@ -91,7 +88,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             icono: <PictureAsPdfOutlinedIcon />,
             color: '#d32f2f',
             fondo: '#fff5f5',
-            servicio: () => descargarReporteDiarioServicioWeb(empresaId,tomaFisicaInventarioId)
+            servicio: () => descargarReporteDiarioServicioWeb(empresaId, tomaFisicaInventarioId)
         },
         {
             titulo: 'Reporte consolidado por dia (EXCEL)',
@@ -100,7 +97,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             icono: <TableViewOutlinedIcon />,
             color: '#2e7d32',
             fondo: '#fff5f5',
-            servicio: () => descargarReporteDiarioExcelServicioWeb(empresaId,tomaFisicaInventarioId)
+            servicio: () => descargarReporteDiarioExcelServicioWeb(empresaId, tomaFisicaInventarioId)
         },
         {
             titulo: 'Reporte final al cierre de la toma fisica (EXCEL)',
@@ -109,7 +106,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
             icono: <TableViewOutlinedIcon />,
             color: '#2e7d32',
             fondo: '#f3faf4',
-            servicio: () =>descargarReporteFinalExcelServicioWeb(empresaId,tomaFisicaInventarioId)
+            servicio: () => descargarReporteFinalExcelServicioWeb(empresaId, tomaFisicaInventarioId)
         },
         {
             titulo: 'Reporte final al cierre de la toma fisica (PDF)',
@@ -118,7 +115,25 @@ const ReportesAuditoriaEmpresasComponent = () => {
             icono: <PictureAsPdfOutlinedIcon />,
             color: '#d32f2f',
             fondo: '#fff5f5',
-            servicio: () =>descargarReporteFinalPdfServicioWeb(empresaId,tomaFisicaInventarioId)
+            servicio: () => descargarReporteFinalPdfServicioWeb(empresaId, tomaFisicaInventarioId)
+        },
+        {
+            titulo: 'Acta responsabilidad auditoria (PDF)',
+            descripcion: 'Acta legal para finalizacion del inventario.',
+            formato: 'PDF',
+            icono: <PictureAsPdfOutlinedIcon />,
+            color: '#d32f2f',
+            fondo: '#fff5f5',
+            servicio: () => descargarActaInvetarioServicioWeb(tomaFisicaInventarioId)
+        },
+        {
+            titulo: 'Descargar items reconteo (EXCEL)',
+            descripcion: 'Descargar reporte para subir reconteo',
+            formato: 'EXCEL',
+            icono: <RestoreIcon />,
+            color: '#2fd381',
+            fondo: '#fff5f5',
+            servicio: () => descargarReporteParaReconteoServicioWeb(tomaFisicaInventarioId)
         },
         // {
         //     titulo: 'Reporte diario',
@@ -141,7 +156,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
     ];
 
 
-    const ejecutarReporte = async (servicio: () => Promise<any> ) => {
+    const ejecutarReporte = async (servicio: () => Promise<unknown>) => {
         startLoading();
         try {
             const resultado = await servicio();
@@ -168,11 +183,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
         }
     };
 
-
-    const puedeGenerar =
-        empresaId &&
-        tomaFisicaInventarioId;
-
+    const puedeGenerar = empresaId && tomaFisicaInventarioId;
 
     return (
 
@@ -194,111 +205,18 @@ const ReportesAuditoriaEmpresasComponent = () => {
                         spacing={2}
                     >
 
-                        <Autocomplete
-                            fullWidth
-                            options={empresas}
-                            getOptionLabel={x => x.nombre}
-                            isOptionEqualToValue={
-                                (option, value) =>
-                                    option.id === value.id
-                            }
-                            value={
-                                empresas.find(
-                                    x => x.id === empresaId
-                                ) ?? null
-                            }
-                            onChange={(_, value) =>
-                                cambiarEmpresa(value)
-                            }
-                            renderInput={params => (
-
-                                <TextField
-                                    {...params}
-                                    label="Empresa"
-                                    size="small"
-                                    InputProps={{
-                                        ...params.InputProps,
-
-                                        startAdornment: (
-                                            <>
-                                                <BusinessOutlinedIcon
-                                                    sx={{
-                                                        mr: 1,
-                                                        color: 'text.secondary'
-                                                    }}
-                                                />
-
-                                                {params.InputProps.startAdornment}
-                                            </>
-                                        )
-                                    }}
-                                />
-
-                            )}
+                        <EmpresaAutocompleteComponent
+                            value={empresaId}
+                            onChange={id => {
+                                setEmpresaId(id);
+                                setTomaFisicaInventarioId('');
+                            }}
                         />
 
-
-                        <Autocomplete
-                            fullWidth
-                            options={tomasFisicas}
-                            disabled={
-                                !empresaId ||
-                                cargandoTomas
-                            }
-                            getOptionLabel={x => x.nombre}
-                            isOptionEqualToValue={
-                                (option, value) =>
-                                    option.id === value.id
-                            }
-                            value={
-                                tomasFisicas.find(
-                                    x =>
-                                        x.id ===
-                                        tomaFisicaInventarioId
-                                ) ?? null
-                            }
-                            onChange={(_, value) =>
-                                setTomaFisicaInventarioId(
-                                    value?.id ?? ''
-                                )
-                            }
-                            renderInput={params => (
-
-                                <TextField
-                                    {...params}
-                                    label="Toma física"
-                                    size="small"
-                                    InputProps={{
-                                        ...params.InputProps,
-
-                                        startAdornment: (
-                                            <>
-                                                <InventoryOutlinedIcon
-                                                    sx={{
-                                                        mr: 1,
-                                                        color: 'text.secondary'
-                                                    }}
-                                                />
-
-                                                {params.InputProps.startAdornment}
-                                            </>
-                                        ),
-
-                                        endAdornment: (
-                                            <>
-                                                {cargandoTomas && (
-                                                    <CircularProgress
-                                                        size={18}
-                                                    />
-                                                )}
-
-                                                {params.InputProps.endAdornment}
-                                            </>
-                                        )
-                                    }}
-                                />
-
-                            )}
+                        <TomaFisicaAutocompleteComponent
+                            empresaId={empresaId}
+                            value={tomaFisicaInventarioId}
+                            onChange={setTomaFisicaInventarioId}
                         />
 
                     </Stack>
@@ -308,10 +226,7 @@ const ReportesAuditoriaEmpresasComponent = () => {
 
                 <Box>
 
-                    <Typography
-                        variant="h6"
-                        fontWeight={700}
-                    >
+                    <Typography variant="h6" fontWeight={700} >
                         Reportes disponibles
                     </Typography>
 
@@ -427,14 +342,10 @@ const ReportesAuditoriaEmpresasComponent = () => {
                                     <Button
                                         fullWidth
                                         variant="outlined"
-                                        startIcon={
-                                            <DownloadOutlinedIcon />
-                                        }
+                                        startIcon={<DownloadOutlinedIcon />}
                                         disabled={!puedeGenerar}
                                         onClick={() =>
-                                            ejecutarReporte(
-                                                reporte.servicio
-                                            )
+                                            ejecutarReporte(reporte.servicio)
                                         }
                                         sx={{
                                             textTransform: 'none',

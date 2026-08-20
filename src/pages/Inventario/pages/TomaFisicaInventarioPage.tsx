@@ -35,10 +35,10 @@ const TomaFisicaInventarioPage = () => {
         cerrarFormulario,
         guardarTomaFisica,
         cargarDatos,
-        abrirModalSubidaInventario, 
+        abrirModalSubidaInventario,
         setAbrirModalSubidaInventario,
         abrirSubirInventario,
-        abrirModalSubirReconteo, 
+        abrirModalSubirReconteo,
         setAbrirModalSubirReconteo,
         abrirSubirReconteo
     } = useTomasFisicasInventario();
@@ -50,102 +50,102 @@ const TomaFisicaInventarioPage = () => {
     );
 
     return (
-       <BasePage title='Tomas físicas de inventario'>
-        <Box sx={{ p: 2 }}>
-            <Stack
-                direction={{
-                    xs: 'column',
-                    sm: 'row'
-                }}
-                justifyContent="space-between"
-                alignItems={{
-                    xs: 'stretch',
-                    sm: 'center'
-                }}
-                spacing={1.5}
-                mb={2}
-            >
-                <Box>
+        <BasePage title='Tomas físicas de inventario'>
+            <Box sx={{ p: 2 }}>
+                <Stack
+                    direction={{
+                        xs: 'column',
+                        sm: 'row'
+                    }}
+                    justifyContent="space-between"
+                    alignItems={{
+                        xs: 'stretch',
+                        sm: 'center'
+                    }}
+                    spacing={1.5}
+                    mb={2}
+                >
+                    <Box>
 
-                    <Typography
-                        variant="body2"
-                        color="text.secondary"
-                    >
-                        Administración de procesos de inventario
-                    </Typography>
-                </Box>
+                        <Typography
+                            variant="body2"
+                            color="text.secondary"
+                        >
+                            Administración de procesos de inventario
+                        </Typography>
+                    </Box>
 
-                <Stack direction="row" spacing={1}>
-                    <Button
-                        variant="outlined"
-                        startIcon={<RefreshIcon />}
-                        onClick={() => void cargarDatos()}
-                        disabled={cargando}
-                    >
-                        Actualizar
-                    </Button>
+                    <Stack direction="row" spacing={1}>
+                        <Button
+                            variant="outlined"
+                            startIcon={<RefreshIcon />}
+                            onClick={() => void cargarDatos()}
+                            disabled={cargando}
+                        >
+                            Actualizar
+                        </Button>
 
-                    <Button
-                        variant="contained"
-                        startIcon={<AddIcon />}
-                        onClick={abrirNuevo}
-                    >
-                        Nueva toma física
-                    </Button>
+                        <Button
+                            variant="contained"
+                            startIcon={<AddIcon />}
+                            onClick={abrirNuevo}
+                        >
+                            Nueva toma física
+                        </Button>
+                    </Stack>
                 </Stack>
-            </Stack>
 
-            {error && (
-                <Alert
-                    severity="error"
-                    sx={{ mb: 2 }}
-                >
-                    {error}
-                </Alert>
-            )}
+                {error && (
+                    <Alert
+                        severity="error"
+                        sx={{ mb: 2 }}
+                    >
+                        {error}
+                    </Alert>
+                )}
 
-            {cargando ? (
-                <Box
-                    display="flex"
-                    justifyContent="center"
-                    py={6}
-                >
-                    <CircularProgress size={32} />
-                </Box>
-            ) : (
-                <CustomDataGridTs
-                    gridId="tomas-fisicas-inventario-grid"
-                    rows={tomasFisicas}
-                    columns={columns}
-                    getRowId={row => row.id}
-                    addNumeration
-                    hasFilters
-                    hasPagination
-                    pageSizes={[5, 10, 20]}
-                    initialPageSize={10}
-                    searchLabel="Buscar"
-                    titleEmptyTable="No existen tomas físicas registradas"
+                {cargando ? (
+                    <Box
+                        display="flex"
+                        justifyContent="center"
+                        py={6}
+                    >
+                        <CircularProgress size={32} />
+                    </Box>
+                ) : (
+                    <CustomDataGridTs
+                        gridId="tomas-fisicas-inventario-grid"
+                        rows={tomasFisicas}
+                        columns={columns}
+                        getRowId={row => row.id}
+                        addNumeration
+                        hasFilters
+                        hasPagination
+                        pageSizes={[5, 10, 20]}
+                        initialPageSize={10}
+                        searchLabel="Buscar"
+                        titleEmptyTable="No existen tomas físicas registradas"
+                    />
+                )}
+
+                <TomaFisicaInventarioFormDialog
+                    open={formularioAbierto}
+                    tomaFisica={tomaFisicaSeleccionada}
+                    empresas={empresas}
+                    guardando={guardando}
+                    onClose={cerrarFormulario}
+                    onGuardar={guardarTomaFisica}
                 />
-            )}
 
-            <TomaFisicaInventarioFormDialog
-                open={formularioAbierto}
-                tomaFisica={tomaFisicaSeleccionada}
-                empresas={empresas}
-                guardando={guardando}
-                onClose={cerrarFormulario}
-                onGuardar={guardarTomaFisica}
-            />
+                <CustomModalTs width='80%' height='90%' open={abrirModalSubidaInventario} handleClose={() => setAbrirModalSubidaInventario(false)} >
+                    <SubirInventarioModal inventario={tomaFisicaSeleccionada ?? undefined} />
+                </CustomModalTs>
 
-            <CustomModalTs width='80%' open={abrirModalSubidaInventario} handleClose={() => setAbrirModalSubidaInventario(false)} >
-                <SubirInventarioModal inventario={tomaFisicaSeleccionada ?? undefined} />
-            </CustomModalTs>
-
-             <CustomModalTs width='80%' open={abrirModalSubirReconteo} handleClose={() => setAbrirModalSubirReconteo(false)} >
-                <SubirReConteoInventario inventario={tomaFisicaSeleccionada ?? undefined} cerrarModal={setAbrirModalSubirReconteo} />
-            </CustomModalTs>
-        </Box>
-       </BasePage>
+                <CustomModalTs width='80%' height='90%' open={abrirModalSubirReconteo} handleClose={() => setAbrirModalSubirReconteo(false)} >
+                    <SubirReConteoInventario inventario={tomaFisicaSeleccionada ?? undefined} cerrarModal={setAbrirModalSubirReconteo} />
+                </CustomModalTs>
+            </Box>
+        </BasePage>
     );
 };
 
