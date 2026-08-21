@@ -1,6 +1,8 @@
 const URL_BASE = import.meta.env.VITE_REACT_APP_BASE_URL;
 export const END_POINTS ={
     LOGIN: `${URL_BASE}User`,
+    UPDATE_PASSWORD: `${URL_BASE}UsuariosLoginSys/update-password`,
+
     GET_ORGANIZATIONS: `${URL_BASE}Common/Organizaciones`,
     UPDATE_CAJAS: `${URL_BASE}Contab/UpdateCaja`,
     REPORTE_GESTIONES_COBROS: `${URL_BASE}GestionCobros/Parametros`,

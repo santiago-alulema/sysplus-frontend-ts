@@ -22,6 +22,8 @@ import {
 
 import {
     descargarActaInvetarioServicioWeb,
+    descargarFinalConsolidadoExcelServicioWeb,
+    descargarFinalConsolidadoPdfServicioWeb,
     descargarReporteDiarioExcelServicioWeb,
     descargarReporteDiarioServicioWeb,
     descargarReporteFinalExcelServicioWeb,
@@ -117,6 +119,28 @@ const ReportesAuditoriaEmpresasComponent = () => {
             fondo: '#fff5f5',
             servicio: () => descargarReporteFinalPdfServicioWeb(empresaId, tomaFisicaInventarioId)
         },
+
+
+        {
+            titulo: 'Reporte final consolidado (PDF)',
+            descripcion: 'Reporte final consolidado pdf.',
+            formato: 'PDF',
+            icono: <PictureAsPdfOutlinedIcon />,
+            color: '#d32f2f',
+            fondo: '#fff5f5',
+            servicio: () => descargarFinalConsolidadoPdfServicioWeb(empresaId, tomaFisicaInventarioId)
+        },
+
+        {
+            titulo: 'Reporte final consolidado (EXCEL)',
+            descripcion: 'Reporte final consolidado excel.',
+            formato: 'EXCEL',
+            icono: <TableViewOutlinedIcon />,
+            color: '#2e7d32',
+            fondo: '#f3faf4',
+            servicio: () => descargarFinalConsolidadoExcelServicioWeb(empresaId, tomaFisicaInventarioId)
+        },
+
         {
             titulo: 'Acta responsabilidad auditoria (PDF)',
             descripcion: 'Acta legal para finalizacion del inventario.',
@@ -126,6 +150,8 @@ const ReportesAuditoriaEmpresasComponent = () => {
             fondo: '#fff5f5',
             servicio: () => descargarActaInvetarioServicioWeb(tomaFisicaInventarioId)
         },
+
+        
         {
             titulo: 'Descargar items reconteo (EXCEL)',
             descripcion: 'Descargar reporte para subir reconteo',

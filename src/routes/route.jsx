@@ -103,6 +103,7 @@ import ReporteProgresoPage from "@/pages/Inventario/pages/ReporteProgresoPage";
 import ReporteComprobantePorUsuario from "@/pages/Contabilidad/Pages/Comprobantes_Pagos/ReporteComprobantePorUsuario";
 import AgenciaAuditoriaPage from "@/pages/Inventario/pages/AgenciaAuditoriaPage";
 import ReportesTomaFisicaPage from "@/pages/Inventario/pages/ReportesTomaFisicaPage";
+import ModificarCodigoInventarioPage from "@/pages/Inventario/pages/ModificarCodigoInventarioPage";
 
 export const routes = [
 
@@ -119,6 +120,8 @@ export const routes = [
   { path: "/reporte-comprobante-por-usuario", element: <ReporteComprobantePorUsuario /> },
   { path: "/auditoria-agencia-empleados", element: <AgenciaAuditoriaPage /> },
   { path: "/reporte-toma-fisica-empresas-nuevas", element: <ReportesTomaFisicaPage /> },
+  { path: "/editar-codigo-inventario-item", element: <ModificarCodigoInventarioPage /> },
+
 
 
 

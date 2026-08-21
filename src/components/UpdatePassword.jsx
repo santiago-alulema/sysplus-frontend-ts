@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
     Box,
     Paper,
-    CardMedia,
     CardContent,
     Typography,
     TextField,
@@ -12,56 +11,29 @@ import {
     Divider
 } from '@mui/material';
 import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from '@mui/icons-material';
-import LogoOriginal from '../assets/images/LogoOriginal.png';
-import Usuario from '../Models/UsuarioLogin';
-import { getLogin } from '../services/Service_Api_Login';
+import { actualizarPasswordUserServicioWeb, getLogin } from '../services/Service_Api_Login';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ChanceStyle from './ChanceStyle';
-import { showAlert } from '@/utils/modalAlerts';
 
-const Login = ({ usuario, setUsuario }) => {
+const UpdatePassword = ({ usuario, setUsuario }) => {
+   
+    
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
     const [showPass, setShowPass] = useState(false);
+    const [showPassConfirm, setShowPassConfirm] = useState(false);
+
     const [isLoading, setIsLoading] = useState(false);
     let navigate = useNavigate();
 
-    const Enter_System = async (e) => {
-        e?.preventDefault?.();
-        if (!user?.trim() || !password) return;
-
-        Usuario.user = user;
-        Usuario.password = password;
-
-        try {
-            setIsLoading(true);
-            const result = await getLogin(Usuario);
-            setUsuario(result)
-            console.log(result)
-            // navigate('/');
-            if(!result && !result?.debeCambiarPassword){
-             window.location.reload();
-            }
-            return result;
-        } catch (error) {
-            const configAlert = {
-                title: 'Error',
-                message: `Error: <strong>${error}</strong>.`,
-                type: 'error',
-                callBackFunction: false,
-            };
-            showAlert(configAlert);
-            throw error;
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') Enter_System(e);
-    };
+    const updatePassword = async () =>{
+        const respuesta = await actualizarPasswordUserServicioWeb({userName: usuario.User, password: password});
+            console.log("first", respuesta)
+        setUsuario(respuesta);
+    }
+   
 
     return (
         <Box
@@ -77,7 +49,6 @@ const Login = ({ usuario, setUsuario }) => {
 
             }}
         >
-            <ChanceStyle />
 
             <Paper
                 elevation={0}
@@ -106,18 +77,7 @@ const Login = ({ usuario, setUsuario }) => {
                             'linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 100%)',
                     }}
                 >
-                    <CardMedia
-                        component="img"
-                        image={LogoOriginal}
-                        alt="Logo"
-                        sx={{
-                            height: 80,
-                            width: 'auto',
-                            objectFit: 'contain',
-                            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.15))',
-                            borderRadius: 50
-                        }}
-                    />
+                   
                 </Box>
 
                 <Divider />
@@ -128,71 +88,16 @@ const Login = ({ usuario, setUsuario }) => {
                         fontWeight={800}
                         sx={{ textAlign: 'center', letterSpacing: 0.5, mb: 0.5 }}
                     >
-                        LOGIN
-                    </Typography>
-                    <Typography
-                        variant="body2"
-                        color="black"
-                        sx={{ textAlign: 'center', mb: 2 }}
-                    >
-                        Ingresa tus credenciales para continuar
+                        CAMBIAR CONTRASEÑA
                     </Typography>
 
                     <Box
                         component="form"
                         noValidate
                         autoComplete="off"
-                        onSubmit={Enter_System}
                     >
-                        <TextField
-                            label="USUARIO"
-                            placeholder="tu.usuario"
-                            fullWidth
-                            required
-                            value={user}
-                            onChange={(e) => setUser(e.target.value)}
-                            onKeyDown={handleKeyDown}
-                            size="small"
-                            autoFocus
-                            margin="normal"
-                            variant="standard"
-                            sx={{
-                                '& .MuiInput-root': {
-                                    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                                    borderRadius: '8px',
-                                    padding: '4px 10px',
-                                },
-
-                                '& input': {
-                                    backgroundColor: 'transparent !important',
-                                },
-
-                                '& input:-webkit-autofill': {
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: '#000',
-                                    caretColor: '#000',
-                                },
-                            }}
-                            InputProps={{
-                                sx: {
-                                    fontSize: '0.8rem',
-                                },
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <PersonOutline fontSize="small" />
-                                    </InputAdornment>
-                                ),
-                            }}
-                            InputLabelProps={{
-                                sx: {
-                                    fontSize: '0.75rem',
-                                    color: 'black',
-                                },
-                            }}
-                        />
-
-                        <TextField
-                            label="CONTRASEÑA"
+                          <TextField
+                            label="NUEVA CONTRASEÑA"
                             placeholder="••••••••"
                             fullWidth
                             variant='standard'
@@ -200,7 +105,6 @@ const Login = ({ usuario, setUsuario }) => {
                             type={showPass ? "text" : "password"}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            onKeyDown={handleKeyDown}
                             size="small"
                             margin="normal"
                             sx={{
@@ -248,14 +152,69 @@ const Login = ({ usuario, setUsuario }) => {
                             }}
                         />
 
+                        <TextField
+                            label="CONFIRMAR CONTRASEÑA"
+                            placeholder="••••••••"
+                            fullWidth
+                            variant='standard'
+                            required
+                            type={showPassConfirm ? "text" : "password"}
+                            value={passwordConfirm}
+                            onChange={(e) => setPasswordConfirm(e.target.value)}
+                            size="small"
+                            margin="normal"
+                            sx={{
+                                '& .MuiInput-root': {
+                                    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                                    borderRadius: '8px',
+                                    padding: '4px 10px',
+                                },
+
+                                '& input': {
+                                    backgroundColor: 'transparent !important',
+                                },
+
+                                '& input:-webkit-autofill': {
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: '#000',
+                                    caretColor: '#000',
+                                },
+                            }}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <LockOutlined fontSize="small" />
+                                    </InputAdornment>
+                                ),
+                                sx: {
+                                    fontSize: "0.8rem",
+                                },
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="mostrar/ocultar contraseña"
+                                            onClick={() => setShowPassConfirm((s) => !s)}
+                                            edge="end"
+                                            size="small"
+                                            tabIndex={-1}
+                                        >
+                                            {showPass ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                            InputLabelProps={{
+                                sx: { fontSize: "0.75rem", color: "black" },
+                            }}
+                        />
+
 
                         <Button
                             variant="contained"
                             fullWidth
                             size='small'
-                            type="submit"
-                            onClick={Enter_System}
-                            disabled={!user?.trim() || !password || isLoading}
+                            disabled={password !== passwordConfirm}
+                            onClick={updatePassword}
                             sx={{
                                 mt: 1,
                                 py: 1.1,
@@ -267,7 +226,7 @@ const Login = ({ usuario, setUsuario }) => {
                                 height: 30
                             }}
                         >
-                            {isLoading ? 'Ingresando…' : 'INGRESAR'}
+                            {isLoading ? 'Ingresando…' : 'ACTUALIZAR'}
                         </Button>
 
                         <Box sx={{ display: 'flex', justifyContent: 'end', mt: 3 }}>
@@ -282,4 +241,4 @@ const Login = ({ usuario, setUsuario }) => {
     );
 };
 
-export default Login;
+export default UpdatePassword;

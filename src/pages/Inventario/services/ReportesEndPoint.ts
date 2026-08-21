@@ -11,4 +11,10 @@ export const ReportesEndPoint = {
     DESCARGAR_REPORTE_PARA_SUBIR_RECONTEO: 'ReconteoInventario/descargar-reporte-para-reconteo',
     DESCARGAR_ACTA_FIRMAS: 'ReporteInventarioUnnoCycle/descargar-acta-entrega',
 
+
+
+    DESCARGAR_REPORTE_FINAL_CONSOLIDADO_PDF: 'ReporteInventarioUnnoCycle/descargar-reporte-final-consolidado-pdf',
+    DESCARGAR_REPORTE_FINAL_CONSOLIDADO_EXCEL: 'ReporteInventarioUnnoCycle/descargar-excel-reporte-final-consolidado',
+
+
 }

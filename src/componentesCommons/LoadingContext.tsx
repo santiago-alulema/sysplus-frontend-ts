@@ -1,6 +1,6 @@
 import React, { createContext, useState, ReactNode, useContext } from 'react';
 import { Backdrop, Box, CircularProgress } from '@mui/material';
-import logo from '@/assets/images/logo.png';
+import logo from '@/assets/images/LogoOriginal.png';
 
 interface LoadingContextType {
     showLoading: boolean;
