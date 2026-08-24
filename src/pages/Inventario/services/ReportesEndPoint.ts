@@ -15,6 +15,6 @@ export const ReportesEndPoint = {
 
     DESCARGAR_REPORTE_FINAL_CONSOLIDADO_PDF: 'ReporteInventarioUnnoCycle/descargar-reporte-final-consolidado-pdf',
     DESCARGAR_REPORTE_FINAL_CONSOLIDADO_EXCEL: 'ReporteInventarioUnnoCycle/descargar-excel-reporte-final-consolidado',
-
+    DESCARGAR_REPORTE_FINAL_CONSOLIDADO_TXT: 'ReporteInventarioUnnoCycle/descargar-txt-reporte-final-consolidado',
 
 }

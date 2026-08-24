@@ -73,7 +73,7 @@ export const descargarActaInvetarioServicioWeb = (tomaFisicaId: string) =>
 
 
 
-    export const descargarFinalConsolidadoExcelServicioWeb = (empresaId:string, tomaFisicaId: string) =>
+export const descargarFinalConsolidadoExcelServicioWeb = (empresaId: string, tomaFisicaId: string) =>
     request<string>(
         'get',
         `${ReportesEndPoint.DESCARGAR_REPORTE_FINAL_CONSOLIDADO_EXCEL}/${empresaId}/${tomaFisicaId}`,
@@ -83,10 +83,20 @@ export const descargarActaInvetarioServicioWeb = (tomaFisicaId: string) =>
     );
 
 
-    export const descargarFinalConsolidadoPdfServicioWeb = (empresaId:string,tomaFisicaId: string) =>
+export const descargarFinalConsolidadoPdfServicioWeb = (empresaId: string, tomaFisicaId: string) =>
     request<string>(
         'get',
         `${ReportesEndPoint.DESCARGAR_REPORTE_FINAL_CONSOLIDADO_PDF}/${empresaId}/${tomaFisicaId}`,
+        undefined,
+        undefined,
+        true
+    );
+
+
+export const descargarFinalConsolidadoTXTServicioWeb = (empresaId: string, tomaFisicaId: string) =>
+    request<string>(
+        'get',
+        `${ReportesEndPoint.DESCARGAR_REPORTE_FINAL_CONSOLIDADO_TXT}/${empresaId}/${tomaFisicaId}`,
         undefined,
         undefined,
         true
