@@ -20,7 +20,7 @@ import {
 import LocationBoxItem from './LocationBoxItem';
 
 import styles from '../css/InventarioComponent.module.css';
-import { useRef, useState } from 'react';
+import {  useState } from 'react';
 
 const InventarioCiegoCompoenent = ({ inventario }) => {
 
@@ -49,7 +49,7 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
     setObservacion,
     observationSelection,
     SelectObservation,
-    habiliatObsercacion,
+    activarGrabar,
     isKit,
     CheckIsKit,
     estadoKit,
@@ -66,6 +66,7 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
   } = inventario;
 
   const [focusBusqueda, setFocusBusqueda] = useState(0);
+
   const grabarItemRegresarReferencia = async () => {
     const grabado = await grabarItem();
     if (grabado) {
@@ -73,6 +74,7 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
       setFocusBusqueda(prev => prev + 1);
     }
   };
+
   const estadosProducto =
     userLogin?.Parametros?.estados_unnoparts_inventario
       ? [
@@ -602,6 +604,7 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
           <Button
             variant="contained"
             onClick={grabarItemRegresarReferencia}
+            disabled={activarGrabar}
             sx={{
               borderRadius: 5,
               backgroundColor: '#1f6feb',
@@ -613,7 +616,7 @@ const InventarioCiegoCompoenent = ({ inventario }) => {
               }
             }}
           >
-            GRABAR
+            {activarGrabar ? 'Grabando...' : 'Grabar'}
           </Button>
         </Grid>
       </Grid>

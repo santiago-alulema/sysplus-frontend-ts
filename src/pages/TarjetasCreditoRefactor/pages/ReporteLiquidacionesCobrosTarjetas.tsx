@@ -36,9 +36,9 @@ const ReporteLiquidacionesCobrosTarjetas = () => {
   return (
     <Grid container spacing={2}>
       <Grid item lg={12} textAlign='right'>
-        <Button onClick={descargarReporte}>Descargar reporte EXCEL</Button>
+        <Button onClick={descargarReporte} variant="contained">Descargar reporte EXCEL</Button>
       </Grid>
-      <Grid item lg={12}>
+      <Grid item lg={12} sm={12} xs={12}>
         <CustomGridCrud<ReporteCobroOriginalLiquidacionInDto>
           title="Pagos originales"
           rows={reporte}

@@ -23,6 +23,7 @@ const InventarioCiego = () => {
     objectAgencia,
     selectNameAgencia,
     userLogin,
+    obtenerUsuario,
     openFinishAuditory,
     setOpenFinishAuditory,
     confirmInventoryFinish,
@@ -65,10 +66,9 @@ const InventarioCiego = () => {
         sx={{
           width: '100%',
           px: { xs: 1.5, md: 2 }
-        }}
-      >
-
-        <Paper
+        }}>
+       { ["nancysamaniego", "ligiaparedes", "nancysamaniegouc", "ligiaparedesuc"].includes(!userLogin?.User ? "test" : userLogin?.User) && (
+         <Paper
           elevation={0}
           sx={{
             width: '100%',
@@ -156,6 +156,11 @@ const InventarioCiego = () => {
             </Button>
           </Stack>
         </Paper>
+
+       )
+        
+       }
+
         <CabeceraInventario
           seleccionarAgencia={seleccionarAgencia}
           seleccionarAgenciaYJefeAgencia={seleccionarAgenciaYJefeAgencia}

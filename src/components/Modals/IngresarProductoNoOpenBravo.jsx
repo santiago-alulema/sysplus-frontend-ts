@@ -151,6 +151,7 @@ const IngresarProductoNoOpenBravo = ({ open, setOpen, titulo, mensaje, user, cod
             return toast.warn("ELIJA EL TIPO DE DAÑO DE LA MOTO", { position: toast.POSITION.TOP_CENTER })
         }
 
+        const idOperacion = crypto.randomUUID();
 
         const tomaFisicaProducto = new TomaFisicaProducto(
             codProducto,
@@ -177,7 +178,13 @@ const IngresarProductoNoOpenBravo = ({ open, setOpen, titulo, mensaje, user, cod
             String(user),
             String(codigoAgencia),
             "SIN LOCALIZACION",
-            String(typeDamageMotocycle)
+            String(typeDamageMotocycle),
+            "",
+            "",
+            "",
+            "",
+            0,
+            idOperacion
         );
         const functionThatReturnPromise = async () => {
             try {

@@ -104,6 +104,8 @@ import ReporteComprobantePorUsuario from "@/pages/Contabilidad/Pages/Comprobante
 import AgenciaAuditoriaPage from "@/pages/Inventario/pages/AgenciaAuditoriaPage";
 import ReportesTomaFisicaPage from "@/pages/Inventario/pages/ReportesTomaFisicaPage";
 import ModificarCodigoInventarioPage from "@/pages/Inventario/pages/ModificarCodigoInventarioPage";
+import ValoresMatriculacionPage from "@/pages/ValoresMatriculacion/pages/ValoresMatriculacionPage";
+import ValoresMatriculacionIndex from "@/pages/ValoresMatriculacion/pages/ValoresMatriculacionIndex";
 
 export const routes = [
 
@@ -130,6 +132,7 @@ export const routes = [
   { path: "/administracion-agencias-inventario", element: <AgenciasInventarioPage /> },
   { path: "/administracion-toma-fisica", element: <TomaFisicaInventarioPage /> },
   { path: "/administracion-empleados-inventario", element: <EmpleadosInventarioPage /> },
+  { path: "/administracion-valores-matriculacion", element: <ValoresMatriculacionIndex /> },
 
 
   { path: "/control-matriculacion-principal", element: <ControlMatriculacion /> },

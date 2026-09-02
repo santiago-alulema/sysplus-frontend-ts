@@ -1,6 +1,6 @@
 import { SAVE_PRODUCT_INVENTORY } from '@/services/Api_Inventario/Api_TomaFisicaInventario';
 import { showAlert } from '@/utils/modalAlerts';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import { TomaFisicaProducto } from '@/components/TomaInventarioFisicoComp/class/TomaFisicaProducto';
 
 const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
@@ -17,6 +17,10 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
 
   const [existProduct, setExistProduct] = useState(false);
   const [esSobrante, setEsSobrante] = useState(false);
+  const [activarGrabar, setActivarGrabar] = useState(false);
+  const grabandoRef = useRef(false);
+  const idOperacionRef = useRef(null);
+
 
   const [observacion, setObservacion] = useState('');
   const [observationSelection, setObservationSelection] = useState(0);
@@ -247,6 +251,13 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
   }, [codProducto])
 
   const grabarItem = async () => {
+
+     if (grabandoRef.current) {
+        return false;
+      }
+
+
+
     const error = validarFormulario();
 
     if (error) {
@@ -254,11 +265,15 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
       return false;
     }
 
+    grabandoRef.current = true;
+  setActivarGrabar(true);
+
+     if (!idOperacionRef.current) {
+      idOperacionRef.current = crypto.randomUUID();
+    }
+
     try {
 
-      console.log("codProducto", codProducto)
-      console.log("codigoProducto", codigoProducto)
-      console.log("descripcion", descripcion)
 
       const tomaFisicaProducto = new TomaFisicaProducto(
         !existProduct ? codProducto : codigoProducto,
@@ -291,12 +306,14 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
         `${ubicacion.columna}`,
         `${ubicacion.nivel}`,
         `${ubicacion.posicion}`,
-        `${cantidadRevision}`
+        `${cantidadRevision}`,
+        idOperacionRef.current
       );
 
       const resp = await SAVE_PRODUCT_INVENTORY(tomaFisicaProducto);
 
       InicializarDatos();
+      idOperacionRef.current = null;
 
       respuestaAlert('CORRECTO', resp, 'success');
       return true;
@@ -309,7 +326,11 @@ const InventarioCiegoItemHook = ({ userLogin, seleccionarAgencia }) => {
       );
       return false;
 
-    }
+    }finally {
+
+    grabandoRef.current = false;
+    setActivarGrabar(false);
+  }
   };
 
   const estiloLaberBuenMalEstado = (estado) => {

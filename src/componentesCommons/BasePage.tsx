@@ -43,9 +43,9 @@ const BasePage: React.FC<BasePageProps> = ({
     return (
         <LoadingContextProvider>
             <Box paddingInline={2}>
-                <Card sx={{ px: '40px', py: '20px' }} elevation={5}>
+                <Card sx={{ px: '30px', py: '20px' }} elevation={5}>
                     <CardHeader component={() => <HeaderBasePage {...headerProps} />} />
-                    <CardContent sx={{ mt: 2 }}>{children}</CardContent>
+                    <CardContent sx={{ mt: 1 }}>{children}</CardContent>
                 </Card>
             </Box>
         </LoadingContextProvider>

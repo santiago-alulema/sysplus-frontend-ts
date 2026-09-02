@@ -8,6 +8,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+
 import {
   DataGrid,
   GridColDef,
@@ -23,12 +24,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 
+import "./css/CustomGridCrud.css";
+
 export type CustomGridColumn<T extends GridValidRowModel> = GridColDef<T> & {
   editableCrud?: boolean;
 };
 
-interface CustomGridCrudProps<T extends GridValidRowModel & { id: GridRowId }> {
+interface CustomGridCrudProps<
+  T extends GridValidRowModel & { id: GridRowId }
+> {
   title?: string;
+
   rows: T[];
   columns: CustomGridColumn<T>[];
 
@@ -50,25 +56,36 @@ interface CustomGridCrudProps<T extends GridValidRowModel & { id: GridRowId }> {
   height?: number | string;
 }
 
-export function CustomGridCrud<T extends GridValidRowModel & { id: GridRowId }>({
+export function CustomGridCrud<
+  T extends GridValidRowModel & { id: GridRowId }
+>({
   title = "Listado",
   rows,
   columns,
+
   canCreate = true,
   canEdit = true,
   canDelete = true,
+
   hideActions = false,
   hideCreateButton = false,
   hideEditButton = false,
   hideDeleteButton = false,
+
   createButtonText = "Crear",
+
   onCreate,
   onSave,
   onDelete,
+
   height = 520,
 }: CustomGridCrudProps<T>) {
-  const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
-  const [editedRows, setEditedRows] = useState<Record<GridRowId, T>>({});
+  const [rowModesModel, setRowModesModel] =
+    useState<GridRowModesModel>({});
+
+  const [editedRows, setEditedRows] = useState<
+    Record<GridRowId, T>
+  >({});
 
   const isRowEditing = (id: GridRowId) =>
     rowModesModel[id]?.mode === GridRowModes.Edit;
@@ -76,13 +93,17 @@ export function CustomGridCrud<T extends GridValidRowModel & { id: GridRowId }>(
   const handleEditClick = (id: GridRowId) => {
     setRowModesModel((prev) => ({
       ...prev,
-      [id]: { mode: GridRowModes.Edit },
+      [id]: {
+        mode: GridRowModes.Edit,
+      },
     }));
   };
 
   const handleSaveClick = async (id: GridRowId) => {
     const originalRow = rows.find((x) => x.id === id);
-    const updatedRow = editedRows[id] ?? originalRow;
+
+    const updatedRow =
+      editedRows[id] ?? originalRow;
 
     if (updatedRow && onSave) {
       await onSave(updatedRow);
@@ -91,12 +112,15 @@ export function CustomGridCrud<T extends GridValidRowModel & { id: GridRowId }>(
     setEditedRows((prev) => {
       const copy = { ...prev };
       delete copy[id];
+
       return copy;
     });
 
     setRowModesModel((prev) => ({
       ...prev,
-      [id]: { mode: GridRowModes.View },
+      [id]: {
+        mode: GridRowModes.View,
+      },
     }));
   };
 
@@ -104,23 +128,54 @@ export function CustomGridCrud<T extends GridValidRowModel & { id: GridRowId }>(
     setEditedRows((prev) => {
       const copy = { ...prev };
       delete copy[id];
+
       return copy;
     });
 
     setRowModesModel((prev) => ({
       ...prev,
-      [id]: { mode: GridRowModes.View },
+      [id]: {
+        mode: GridRowModes.View,
+      },
+    }));
+  };
+
+  const handleChange = (
+    id: GridRowId,
+    field: string,
+    value: string
+  ) => {
+    const originalRow = rows.find((x) => x.id === id);
+
+    if (!originalRow) return;
+
+    const updatedRow = {
+      ...originalRow,
+      ...editedRows[id],
+      [field]: value,
+    } as T;
+
+    setEditedRows((prev) => ({
+      ...prev,
+      [id]: updatedRow,
     }));
   };
 
   const finalColumns: GridColDef<T>[] = [
     ...columns.map((column) => ({
       ...column,
+
       editable: false,
+
       renderCell: (params: any) => {
         const id = params.id;
+
         const editing = isRowEditing(id);
-        const rowValue = editedRows[id]?.[params.field] ?? params.value ?? "";
+
+        const rowValue =
+          editedRows[id]?.[params.field] ??
+          params.value ??
+          "";
 
         if (editing && column.editableCrud) {
           return (
@@ -128,27 +183,14 @@ export function CustomGridCrud<T extends GridValidRowModel & { id: GridRowId }>(
               size="small"
               fullWidth
               value={rowValue}
-              onChange={(e) => {
-                const originalRow = rows.find((x) => x.id === id);
-                if (!originalRow) return;
-
-                const updatedRow = {
-                  ...originalRow,
-                  ...editedRows[id],
-                  [params.field]: e.target.value,
-                } as T;
-
-                setEditedRows((prev) => ({
-                  ...prev,
-                  [id]: updatedRow,
-                }));
-              }}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "10px",
-                  backgroundColor: "#fff",
-                },
-              }}
+              onChange={(e) =>
+                handleChange(
+                  id,
+                  params.field,
+                  e.target.value
+                )
+              }
+              className="custom-grid-crud__input"
             />
           );
         }
@@ -157,117 +199,141 @@ export function CustomGridCrud<T extends GridValidRowModel & { id: GridRowId }>(
           return column.valueFormatter(params);
         }
 
-        return rowValue;
+        return (
+          <span className="custom-grid-crud__cell-text">
+            {rowValue}
+          </span>
+        );
       },
     })),
 
     ...(!hideActions
       ? [
-        {
-          field: "actions",
-          headerName: "Acciones",
-          width: 140,
-          sortable: false,
-          filterable: false,
-          align: "center",
-          headerAlign: "center",
-          renderCell: (params) => {
-            const id = params.id;
-            const row = params.row as T;
-            const editing = isRowEditing(id);
+          {
+            field: "actions",
+            headerName: "Acciones",
+            width: 140,
 
-            if (editing) {
+            sortable: false,
+            filterable: false,
+
+            align: "center",
+            headerAlign: "center",
+
+            renderCell: (params) => {
+              const id = params.id;
+
+              const row = params.row as T;
+
+              const editing = isRowEditing(id);
+
+              if (editing) {
+                return (
+                  <Box className="custom-grid-crud__actions">
+                    <Tooltip title="Guardar">
+                      <IconButton
+                        size="small"
+                        color="success"
+                        onClick={() =>
+                          handleSaveClick(id)
+                        }
+                        className="custom-grid-crud__action-button"
+                      >
+                        <SaveIcon fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+
+                    <Tooltip title="Cancelar">
+                      <IconButton
+                        size="small"
+                        color="inherit"
+                        onClick={() =>
+                          handleCancelClick(id)
+                        }
+                        className="custom-grid-crud__action-button"
+                      >
+                        <CancelIcon fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                );
+              }
+
               return (
-                <Box display="flex" gap={1}>
-                  <Tooltip title="Guardar">
-                    <IconButton
-                      size="small"
-                      color="success"
-                      onClick={() => handleSaveClick(id)}
-                    >
-                      <SaveIcon fontSize="small" />
-                    </IconButton>
-                  </Tooltip>
+                <Box className="custom-grid-crud__actions">
+                  {!hideEditButton && canEdit && (
+                    <Tooltip title="Editar">
+                      <IconButton
+                        size="small"
+                        color="primary"
+                        onClick={() =>
+                          handleEditClick(id)
+                        }
+                        className="custom-grid-crud__action-button"
+                      >
+                        <EditIcon fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                  )}
 
-                  <Tooltip title="Cancelar">
-                    <IconButton
-                      size="small"
-                      color="inherit"
-                      onClick={() => handleCancelClick(id)}
-                    >
-                      <CancelIcon fontSize="small" />
-                    </IconButton>
-                  </Tooltip>
+                  {!hideDeleteButton &&
+                    canDelete && (
+                      <Tooltip title="Eliminar">
+                        <IconButton
+                          size="small"
+                          color="error"
+                          onClick={() =>
+                            onDelete?.(id, row)
+                          }
+                          className="custom-grid-crud__action-button"
+                        >
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                    )}
                 </Box>
               );
-            }
-
-            return (
-              <Box display="flex" gap={1}>
-                {!hideEditButton && canEdit && (
-                  <Tooltip title="Editar">
-                    <IconButton
-                      size="small"
-                      color="primary"
-                      onClick={() => handleEditClick(id)}
-                    >
-                      <EditIcon fontSize="small" />
-                    </IconButton>
-                  </Tooltip>
-                )}
-
-                {!hideDeleteButton && canDelete && (
-                  <Tooltip title="Eliminar">
-                    <IconButton
-                      size="small"
-                      color="error"
-                      onClick={() => onDelete?.(id, row)}
-                    >
-                      <DeleteIcon fontSize="small" />
-                    </IconButton>
-                  </Tooltip>
-                )}
-              </Box>
-            );
-          },
-        } as GridColDef<T>,
-      ]
+            },
+          } as GridColDef<T>,
+        ]
       : []),
   ];
 
   return (
     <Paper
       elevation={0}
-      sx={{
-        p: 2,
-        borderRadius: 3,
-        border: "1px solid",
-        borderColor: "divider",
-        backgroundColor: "#fff",
-      }}
+      className="custom-grid-crud"
     >
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h6" fontWeight={700}>
-          {title}
-        </Typography>
+      <Box className="custom-grid-crud__header">
+        <Box>
+          <Typography className="custom-grid-crud__title">
+            {title}
+          </Typography>
+
+          <Typography className="custom-grid-crud__subtitle">
+            {rows.length} registro
+            {rows.length !== 1 ? "s" : ""}
+          </Typography>
+        </Box>
 
         {!hideCreateButton && canCreate && (
           <Button
             variant="contained"
             startIcon={<AddIcon />}
             onClick={onCreate}
-            sx={{
-              borderRadius: 2,
-              textTransform: "none",
-              fontWeight: 600,
-            }}
+            className="custom-grid-crud__create-button"
           >
             {createButtonText}
           </Button>
         )}
       </Box>
 
-      <Box sx={{ height, width: "100%" }}>
+      <Box
+        className="custom-grid-crud__table-container"
+        sx={{
+          height,
+        }}
+      >
         <DataGrid
           rows={rows}
           columns={finalColumns}
@@ -275,55 +341,13 @@ export function CustomGridCrud<T extends GridValidRowModel & { id: GridRowId }>(
           getRowHeight={() => "auto"}
           pagination
           pageSize={10}
-          rowsPerPageOptions={[5, 10, 25, 50]}
-          sx={{
-            border: "none",
-
-            "& .MuiDataGrid-columnHeaderTitle": {
-              whiteSpace: "normal",
-              lineHeight: "1.2",
-              textAlign: "center",
-            },
-
-            "& .MuiDataGrid-columnHeader": {
-              height: "auto !important",
-              alignItems: "center",
-              justifyContent: "center",
-              py: 1,
-            },
-
-            "& .MuiDataGrid-columnHeaders": {
-              maxHeight: "168px !important",
-            },
-
-            "& .MuiDataGrid-cell": {
-              borderColor: "#eef2f7",
-              display: "flex",
-              alignItems: "center",
-              whiteSpace: "normal",
-              wordBreak: "break-word",
-              lineHeight: "1.4 !important",
-              py: 1,
-            },
-
-            "& .MuiDataGrid-cellContent": {
-              whiteSpace: "normal",
-              overflow: "visible",
-              textOverflow: "unset",
-            },
-
-            "& .MuiDataGrid-row": {
-              maxHeight: "none !important",
-            },
-
-            "& .MuiDataGrid-row:hover": {
-              backgroundColor: "#f9fafb",
-            },
-
-            "& .MuiInputBase-root": {
-              fontSize: "14px",
-            },
-          }}
+          rowsPerPageOptions={[
+            5,
+            10,
+            25,
+            50,
+          ]}
+          className="custom-grid-crud__grid"
         />
       </Box>
     </Paper>

@@ -1,10 +1,18 @@
 export interface ProgresoInventarioOutDto {
   nombreInventario: string;
+  totalRegistrosContado: number;
+  totalRegistrosOpen: number;
+  totalRegistroPorcentaje: number;
+  totalCantidadContada: number;
+  totalCantidadOpen: number;
+  totalPorcentajeCantitad: number;
+
   data: ProgresoFecha[];
 }
 
 export interface ProgresoFecha {
   fecha: string;
+  totalContadoPorDia: number;
   progresoGrupo: ProgresoGrupo[];
 }
 

@@ -29,7 +29,9 @@ export class TomaFisicaProducto {
     columna,
     nivel,
     posicion,
-    cantidad_revision
+    cantidad_revision,
+    idOperacion
+
   ) {
     this.codigoProducto = codigoProducto;
     this.nombreProducto = nombreProducto;
@@ -60,6 +62,7 @@ export class TomaFisicaProducto {
     this.columna = columna;
     this.nivel = nivel;
     this.posicion = posicion;
-    this.cantidad_revision = cantidad_revision
+    this.cantidad_revision = cantidad_revision;
+    this.idOperacion = idOperacion
   }
 }

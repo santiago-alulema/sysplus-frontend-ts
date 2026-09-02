@@ -29,6 +29,11 @@ const InventarioCabeceraHook = () => {
     });
   };
 
+  const obtenerUsuario = () =>{
+    const user = Decrypt_User();
+    return user;
+  }
+
   const OnInitPage = async () => {
     const user = Decrypt_User();
     if (user === null) {
@@ -127,7 +132,7 @@ const InventarioCabeceraHook = () => {
     selectNameAgencia,
     idAgencySelect,
     userLogin,
-
+obtenerUsuario,
     openFinishAuditory,
     setOpenFinishAuditory,
     confirmInventoryFinish,

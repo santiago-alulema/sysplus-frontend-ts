@@ -9,6 +9,7 @@ import {
   CardHeader,
   Container,
   Divider,
+  Grid,
   Paper,
   Stack,
   Typography,
@@ -19,6 +20,7 @@ import type { ProgresoInventarioOutDto } from "../models/reporte-progreso.model"
 import { obtenerReporteProgresoServicioWeb } from "../services/ProgresoInventarioServicioWeb";
 import EmpresaAutocompleteComponent from "@/pages/Inventario/components/EmpresaAutocompleteComponent";
 import TomaFisicaAutocompleteComponent from "@/pages/Inventario/components/TomaFisicaAutocompleteComponent";
+import { InfoTotalesInventarioCard } from "../components/InfoTotalesInventarioCard";
 
 const ReporteProgresoPage = () => {
   const [progresoInventario, setProgresoInventario] = useState<ProgresoInventarioOutDto | null>(null);
@@ -30,27 +32,12 @@ const ReporteProgresoPage = () => {
     try {
       startLoading();
 
-      const respuesta = await obtenerReporteProgresoServicioWeb(
-        empresaId,
-        tomaFisicaInventarioId
-      );
-
+      const respuesta = await obtenerReporteProgresoServicioWeb(empresaId, tomaFisicaInventarioId);
       setProgresoInventario(respuesta);
-
-    } catch (error) {
-      console.error(
-        "Error al obtener el reporte de progreso del inventario:",
-        error
-      );
     } finally {
       stopLoading();
     }
-  }, [
-    empresaId,
-    tomaFisicaInventarioId,
-    startLoading,
-    stopLoading
-  ]);
+  }, [empresaId, tomaFisicaInventarioId, startLoading, stopLoading]);
 
   useEffect(() => {
     if (empresaId && tomaFisicaInventarioId)
@@ -59,21 +46,8 @@ const ReporteProgresoPage = () => {
 
   return (
     <BasePage title="Reporte de progreso inventario">
-      <Paper
-        variant="outlined"
-        sx={{
-          p: 2.5,
-          borderRadius: 3
-        }}
-      >
-
-        <Stack
-          direction={{
-            xs: 'column',
-            md: 'row'
-          }}
-          spacing={2}
-        >
+      <Paper variant="outlined" sx={{ p: 2.5, borderRadius: 3 }} >
+        <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} >
 
           <EmpresaAutocompleteComponent
             value={empresaId}
@@ -90,15 +64,10 @@ const ReporteProgresoPage = () => {
           />
 
         </Stack>
-
       </Paper>
       {progresoInventario && (
-        <Container
-          maxWidth="lg"
-          disableGutters
-          sx={{
-            py: 1,
-          }}
+        <Box
+          sx={{ py: 1, }}
         >
           <Box
             sx={{
@@ -134,8 +103,76 @@ const ReporteProgresoPage = () => {
               Seguimiento del cumplimiento por responsable
             </Typography>
           </Box>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(1, 1fr)",
+                md: "repeat(1, 1fr)",
+                lg: "repeat(2, 1fr)",
+              },
+              gap: 2,
+              mb: 2,
+            }}
+          >
+            <Box border={1} padding={2} borderRadius={5} borderColor='#A0A2A1'>
+              <Typography textAlign='center' mb={2}>Medición por Items</Typography>
+              <Stack direction='row' spacing={2} title="Por registros">
+                <InfoTotalesInventarioCard
+                  titulo="Total items"
+                  informacion={progresoInventario.totalRegistrosOpen.toString()}
+                />
 
-          <Stack spacing={2.5}>
+                <InfoTotalesInventarioCard
+                  titulo="Registros  Items contados"
+                  informacion={progresoInventario.totalRegistrosContado.toString()}
+                />
+
+                <InfoTotalesInventarioCard
+                  titulo="Porcentaje completado"
+                  informacion={`${progresoInventario.totalRegistroPorcentaje}%`}
+                />
+              </Stack>
+            </Box>
+
+            <Box border={1} padding={2} borderRadius={5} borderColor='#A0A2A1'>
+              <Typography textAlign='center' mb={2}>Medición por UNIDAD</Typography>
+
+              <Stack direction='row' spacing={2} >
+                <InfoTotalesInventarioCard
+                  titulo="Total unidades"
+                  informacion={progresoInventario.totalCantidadOpen.toString()}
+                />
+
+                <InfoTotalesInventarioCard
+                  titulo="Total unidades contadas"
+                  informacion={progresoInventario.totalCantidadContada.toString()}
+                />
+
+
+                <InfoTotalesInventarioCard
+                  titulo="Porcentaje unidades"
+                  informacion={`${progresoInventario.totalPorcentajeCantitad}%`}
+                />
+              </Stack>
+            </Box>
+
+
+
+          </Box>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(1, 1fr)",
+                md: "repeat(3, 1fr)",
+                lg: "repeat(4, 1fr)",
+              },
+              gap: 2,
+              mb: 2,
+            }} >
             {progresoInventario.data.map((item) => (
               <Card
                 key={item.fecha}
@@ -155,9 +192,30 @@ const ReporteProgresoPage = () => {
                 }}
               >
                 <CardHeader
-                  title={`Fecha: ${item.fecha}`}
-                  subheader={`${item.progresoGrupo.length} responsable${item.progresoGrupo.length === 1 ? "" : "s"
-                    }`}
+                  title={
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: 17,
+                          fontWeight: 700,
+                        }}
+                      >
+                        Fecha: {item.fecha}
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          fontSize: 14,
+                          fontWeight: 600,
+                          color: "text.secondary",
+                          mt: 0.3,
+                        }}
+                      >
+                        Total Contado: {item.totalContadoPorDia}
+                      </Typography>
+                    </Box>
+                  }
+                  subheader={`${item.progresoGrupo.length} responsable${item.progresoGrupo.length === 1 ? "" : "s"}`}
                   titleTypographyProps={{
                     sx: {
                       color: "text.primary",
@@ -181,15 +239,7 @@ const ReporteProgresoPage = () => {
 
                 <Divider />
 
-                <CardContent
-                  sx={{
-                    p: 2.5,
-
-                    "&:last-child": {
-                      pb: 2.5,
-                    },
-                  }}
-                >
+                <CardContent>
                   <Stack spacing={1.5}>
                     {item.progresoGrupo.map((progress) => (
                       <BarraProgreso
@@ -201,11 +251,13 @@ const ReporteProgresoPage = () => {
                       />
                     ))}
                   </Stack>
+
                 </CardContent>
+
               </Card>
             ))}
-          </Stack>
-        </Container>
+          </Box>
+        </Box>
       )}
     </BasePage>
   );
