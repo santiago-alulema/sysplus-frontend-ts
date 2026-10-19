@@ -64,7 +64,7 @@ const ReImprimirLiquidacion = () => {
                     spacing={2}
                     fullWidth
                     style={{ width: '100%' }}>
-                    <Typography variant="h7"
+                    <Typography variant="h6"
                         fontWeight="bold"> INGRESE NUMERO DE LIQUIDACION</Typography>
                     <TextField id="filled-basic"
                         label="Documento"

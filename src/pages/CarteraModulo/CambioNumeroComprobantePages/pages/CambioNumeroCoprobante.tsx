@@ -84,7 +84,6 @@ const CambioNumeroCoprobante = () => {
             </Box>
 
             <Button
-              variant="outlined"
               startIcon={<RefreshIcon />}
               onClick={limpiarFormulario}
             >

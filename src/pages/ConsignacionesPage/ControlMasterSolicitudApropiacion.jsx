@@ -236,7 +236,7 @@ const ControlMasterSolicitudApropiacion = () => {
                     <Typography id="modal-modal-description" sx={{ mt: 2, mb: 2 }}>
                         ATRIBUTO :  {productoApropiacion.descripcion_attributos}
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2, mb: 2 }}>
+                    <Typography  id="modal-modal-description" sx={{ mt: 2, mb: 2 }}>
                         Numero de Cotizacion :
                     </Typography>
                     <TextField
@@ -244,15 +244,7 @@ const ControlMasterSolicitudApropiacion = () => {
                         fullWidth
                         onChange={(e) => setNumeroCotizacion(e.target.value)}
                     />
-                    <Button sx={{
-                        marginTop: '12px',
-                        color: "black",
-                        '&:hover': {
-                            background: 'black',
-                            color: 'white',
-
-                        }
-                    }} variant="contained" > SOLICITAR APROPIACION </Button>
+                    <Button > SOLICITAR APROPIACION </Button>
                 </Box>
             </Modal>
             <ToastContainer />

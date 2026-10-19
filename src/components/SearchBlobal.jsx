@@ -3,10 +3,10 @@ import React from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import { manejoMensajes } from '../../src/helpers/ManejoExcepciones.js'
 import { ToastContainer, toast } from 'react-toastify';
-const SearchBlobal = ({ parameterSearch, 
-                        setParameterSearch, 
-                        functionExecute, 
-                        title = "Buscar" }) => {
+const SearchBlobal = ({ parameterSearch,
+  setParameterSearch,
+  functionExecute,
+  title = "Buscar" }) => {
 
   const search = () => {
     manejoMensajes(functionExecute, "CARGANDO...")
@@ -21,7 +21,7 @@ const SearchBlobal = ({ parameterSearch,
     <>
       <ToastContainer />
       <Grid container>
-        <Grid item xs={12} lg={10} sm={12} sx={12}> 
+        <Grid item xs={12} lg={10} sm={12} sx={12}>
           <TextField id="standard-basic"
             label={title}
             variant="outlined"
@@ -39,22 +39,19 @@ const SearchBlobal = ({ parameterSearch,
               },
             }}
             fullWidth
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
             onChange={(e) => setParameterSearch(e.target.value)}
             value={parameterSearch}
             onKeyDown={handleKeyDown}
           />
         </Grid>
         <Grid item xs={12} lg={2} sm={12}>
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', padding:2, marginLeft:2 }} >
-            <Button 
-                    variant="outlined"
-              // startDecorator={<SearchIcon />}
-              // startIcon={<SearchIcon />}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', padding: 2, marginLeft: 2 }} >
+            <Button
               onClick={search}
               fullWidth
             >
-              <Typography color={'white'} >
+              <Typography >
                 {title}
               </Typography>
             </Button>

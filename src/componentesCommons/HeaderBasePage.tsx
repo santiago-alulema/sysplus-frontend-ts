@@ -90,7 +90,7 @@ const HeaderBasePage: React.FC<HeaderBasePageProps> = ({
                                 onClick={() => navigate("/")}
                             >
                                 <HomeIcon sx={{ mr: 0.5, mt: '-2px' }} fontSize="inherit" />
-                                <Typography fontSize={12} marginLeft={1}>HOME</Typography> 
+                                <Typography color='primary' fontSize={12} marginLeft={1}>HOME</Typography> 
                             </Link>
                             {routes.map((item, index) => (
                                 <Link
@@ -102,7 +102,7 @@ const HeaderBasePage: React.FC<HeaderBasePageProps> = ({
                                     key={`path_${index}`}
                                     onClick={(e) => handleClickLinkItem(e, item)}
                                 >
-                                    <Typography fontSize={12}>{item.text}</Typography> 
+                                    <Typography color='primary' fontSize={12}>{item.text}</Typography> 
                                 </Link>
                             ))}
                         </Breadcrumbs>

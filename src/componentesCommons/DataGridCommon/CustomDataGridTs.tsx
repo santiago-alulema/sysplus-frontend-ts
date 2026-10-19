@@ -733,8 +733,9 @@ const CustomDataGridTs = <T extends object,>({
           {...props}
           style={{
             backgroundColor: 'white',
-            borderBottom: '1px solid #ccc',
-            padding: '12px 8px',
+            borderBottom: '1px solid #e6ebf2',
+            borderRight: '1px solid #edf1f5',
+            padding: '12px 10px',
             textAlign: alignment,
             fontWeight: 'bold',
             fontSize:
@@ -825,7 +826,7 @@ const CustomDataGridTs = <T extends object,>({
 
       const filterCellStyle: CSSProperties = {
         backgroundColor: 'white',
-        borderBottom: '1px solid #ccc',
+        borderBottom: '1px solid #e6ebf2',
         flexDirection:
           iconDirectionFilter === 'end'
             ? 'row-reverse'
@@ -870,13 +871,20 @@ const CustomDataGridTs = <T extends object,>({
   return (
     <Paper
       id={gridId}
+      className="sysplus-data-grid"
+      elevation={0}
       sx={{
         padding: 0,
         width: '100%',
+        overflow: 'hidden',
+        border: '1px solid #e2e8f0',
+        borderRadius: '12px',
+        boxShadow: 'none',
 
         '& .MuiTable-root thead .MuiTableCell-head': {
-          backgroundColor: '#e8e8e8',
-          border: 'none',
+          backgroundColor: '#ffffff',
+          borderBottom: '1px solid #e6ebf2',
+          borderRight: '1px solid #edf1f5',
           fontSize:
             'clamp(0.825rem, 0.650rem + 0.25vi, 2.75rem) !important',
           fontWeight: 'bold'

@@ -44,9 +44,10 @@ const Navbar = ({ userName, onLogout, onToggleSidebar }: NavbarProps) => {
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 1,
         maxHeight: 65,
-        borderBottomLeftRadius: "5px",
-        borderBottomRightRadius: "5px",
-        background: "linear-gradient(90deg, #0a192f, #1e3a8a) !important",
+        boxShadow: "0 2px 12px rgba(15, 31, 52, .12)",
+        borderBottomLeftRadius: "0px",
+        borderBottomRightRadius: "0px",
+        background: "linear-gradient(90deg, #14253c, #213b5a) !important",
       }}
     >
       <Toolbar
@@ -73,7 +74,7 @@ const Navbar = ({ userName, onLogout, onToggleSidebar }: NavbarProps) => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ fontSize: "0.9rem", lineHeight: 1, color: "white" }}
+            sx={{ fontSize: "0.9rem", lineHeight: 1, color: "white", fontWeight: 700, letterSpacing: "0.035em" }}
           >
             SYSPLUS 2.0
           </Typography>
@@ -81,12 +82,12 @@ const Navbar = ({ userName, onLogout, onToggleSidebar }: NavbarProps) => {
 
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <IconButton onClick={handleMenuClick} sx={{ gap: 0.5, p: 0.5 }}>
-            <Avatar sx={{ width: 28, height: 28 }}>
+            <Avatar sx={{ width: 32, height: 32, bgcolor: "rgba(255,255,255,.16)", color: "#fff" }}>
               <AccountCircleIcon fontSize="small" />
             </Avatar>
             <Typography
               variant="body2"
-              sx={{ fontSize: "0.75rem", lineHeight: 1, color: "white" }}
+              sx={{ fontSize: "0.8rem", lineHeight: 1, color: "white", fontWeight: 500 }}
             >
               {userName}
             </Typography>

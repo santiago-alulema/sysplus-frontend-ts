@@ -237,12 +237,6 @@ const SolicitudApropiacion = () => {
                     />
                     <Button sx={{
                         marginTop: '12px',
-                        color: "black",
-                        '&:hover': {
-                            background: 'black',
-                            color: 'white',
-
-                        }
                     }} variant="contained"
                         disabled={enableButtonApropiacion}
                         fullWidth onClick={saveApropiacion}> SOLICITAR APROPIACION </Button>

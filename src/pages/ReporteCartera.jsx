@@ -69,7 +69,7 @@ const ReporteCartera = () => {
                 <Stack spacing={{ xs: 1, sm: 2 }} justifyContent="center" alignItems="center">
 
                     <Stack direction="row" justifyContent="center" alignItems="center" spacing={2} fullWidth width='100%' style={{ width: '100%' }}>
-                        <Typography variant="h7" fontWeight="bold"  > INGRESE NUMERO DE DOCUMENTO</Typography>
+                        <Typography variant="h6" fontWeight="bold"  > INGRESE NUMERO DE DOCUMENTO</Typography>
                         <TextField id="filled-basic" label="Documento" variant="filled" width='90%' onChange={(e) => setNumeroDocumento(e.target.value)}/>
                         <Button variant="contained"  minWidth={250} pl={2} pr={2}
                                 onClick={(e) => consultaReporte(e)}
@@ -107,7 +107,7 @@ const ReporteCartera = () => {
                                         fullWidth 
                                         width='100%'
                                         style={{ width: '100%' }}>
-                                        <Typography variant="h7" 
+                                        <Typography variant="h6" 
                                                     fullWidth
                                                     fontWeight="bold" minWidth={160}> VALOR MORA</Typography>
                                         <TextField
@@ -128,7 +128,7 @@ const ReporteCartera = () => {
                                         fullWidth 
                                         width='100%'
                                         style={{ width: '100%' }}>
-                                        <Typography variant="h7"
+                                        <Typography variant="h6"
                                                     minWidth={150}
                                                     fontWeight="bold"  >G. COBRANZA</Typography>
                                         <TextField
@@ -149,7 +149,7 @@ const ReporteCartera = () => {
                                         alignItems="center"
                                         fullWidth width='100%'
                                         style={{ width: '100%' }}>
-                                        <Typography variant="h7"
+                                        <Typography variant="h6"
                                                     minWidth={150}
                                                     fontWeight="bold" > TOTAL</Typography>
                                         <TextField

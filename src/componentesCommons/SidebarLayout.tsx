@@ -48,12 +48,12 @@ interface SidebarLayoutProps {
 
 // ===== SYSPLUS palette (light-friendly) =====
 const SYS_COLORS = {
-  sidebarBg: "#0a192f", // fondo sidebar
+  sidebarBg: "#14253c", // fondo sidebar
   sidebarText: "#ffffff", // texto sidebar
-  sidebarTextDim: "rgba(255,255,255,0.72)",
-  sidebarHover: "rgba(255,255,255,0.08)",
-  sidebarSelected: "rgba(255,255,255,0.12)",
-  appBarGrad: "linear-gradient(135deg, #111827, #1f2937)", // fondo appbar
+  sidebarTextDim: "rgba(228,236,247,0.68)",
+  sidebarHover: "rgba(255,255,255,0.065)",
+  sidebarSelected: "rgba(255,255,255,0.14)",
+  appBarGrad: "linear-gradient(90deg, #14253c, #213b5a)", // fondo appbar
   appBarText: "#ffffff",
 };
 
@@ -141,7 +141,7 @@ export default function SidebarLayout({
   const DrawerContent = (
     <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <Toolbar sx={{ justifyContent: "space-between", gap: 1 }}>
-        <Typography variant="h6" noWrap sx={{ color: SYS_COLORS.sidebarText }}>
+        <Typography variant="h6" noWrap sx={{ color: SYS_COLORS.sidebarText, fontWeight: 700, fontSize: "1rem", letterSpacing: ".025em" }}>
           {title}
         </Typography>
         <IconButton
@@ -161,13 +161,13 @@ export default function SidebarLayout({
           return (
             <List key={section} disablePadding>
               {hoverOpen && (
-                <ListItemButton onClick={() => toggleSection(section)} sx={{ px: 2 }}>
+                <ListItemButton onClick={() => toggleSection(section)} sx={{ px: 2, mx: 1, my: .35, borderRadius: 1.5 }}>
                   <ListItemText
                     primary={section}
                     primaryTypographyProps={{
                       fontWeight: 700,
-                      fontSize: 12,
-                      letterSpacing: 0.4,
+                      fontSize: 11,
+                      letterSpacing: 0.8,
                       textTransform: "uppercase",
                       sx: { color: SYS_COLORS.sidebarTextDim },
                     }}
@@ -196,6 +196,10 @@ export default function SidebarLayout({
                           selected={selected}
                           sx={{
                             pl: isCompact ? 1 : 5,
+                            mx: 1,
+                            my: .2,
+                            borderRadius: 1.5,
+                            minHeight: 42,
                             pr: isCompact ? 1 : 2,
                             "&.Mui-selected": { bgcolor: SYS_COLORS.sidebarSelected },
                             "&:hover": { bgcolor: SYS_COLORS.sidebarHover },
@@ -242,6 +246,9 @@ export default function SidebarLayout({
                           onClick={handleOpenSection}
                           sx={{
                             px: 1,
+                            mx: .8,
+                            my: .25,
+                            borderRadius: 1.5,
                             justifyContent: "center",
                             "&:hover": { bgcolor: SYS_COLORS.sidebarHover },
                           }}
