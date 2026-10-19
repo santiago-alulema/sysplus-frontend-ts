@@ -15,6 +15,7 @@ import { actualizarPasswordUserServicioWeb, getLogin } from '../services/Service
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { showAlert } from '@/utils/modalAlerts';
 
 const UpdatePassword = ({ usuario, setUsuario }) => {
    
@@ -29,8 +30,21 @@ const UpdatePassword = ({ usuario, setUsuario }) => {
     let navigate = useNavigate();
 
     const updatePassword = async () =>{
+        if(password.trim() === "" || passwordConfirm.trim() === "" )
+            return showAlert({
+                title:"Error",
+                message: "contraseñas no puden ser vacias",
+                type: "error"
+            })
+
+        if(password !== passwordConfirm )
+            return showAlert({
+                title:"Error",
+                message: "las contraseñas no coinciden",
+                type: "error"
+            })
+
         const respuesta = await actualizarPasswordUserServicioWeb({userName: usuario.User, password: password});
-            console.log("first", respuesta)
         setUsuario(respuesta);
     }
    
@@ -213,7 +227,6 @@ const UpdatePassword = ({ usuario, setUsuario }) => {
                             variant="contained"
                             fullWidth
                             size='small'
-                            disabled={password !== passwordConfirm}
                             onClick={updatePassword}
                             sx={{
                                 mt: 1,

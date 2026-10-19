@@ -212,9 +212,10 @@ const InformacionFactura = (props) => {
                             label=""
                             variant="standard"
                             value={numeroFactura}
+                            disabled
                             onChange={(e) => setNumeroFactura(e.target.value)} />
-                        <SearchIcon onClick={(e) => buscarMotoXDocumento(e)} />
-                        <Button onClick={(e) => buscarMotoXDocumento(e)} variant='contained'> consultar</Button>
+                        <SearchIcon onClick={(e) => buscarMotoXDocumento(e)} disabled/>
+                        <Button onClick={(e) => buscarMotoXDocumento(e)} variant='contained' disabled> consultar</Button>
                     </Grid>
                     <Grid item xs={12} md={4} sm={6}>
                         <p style={{

@@ -1,4 +1,3 @@
-import BasePage from '@/componentesCommons/BasePage'
 import { configureMicrofrontendAuth } from '@/CustomElements/auth/configureMicrofrontendAuth'
 
 const ReporteComprobantePorUsuario = () => {

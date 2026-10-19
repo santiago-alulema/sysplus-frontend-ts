@@ -237,9 +237,9 @@ const AuraPage = () => {
                         <TextField id="standard-basic"
                             label=""
                             variant="standard"
-                            onChange={(e) => setNumeroFactura(e.target.value)} />
-                        <SearchIcon onClick={(e) => buscarMotoXDocumento(e)} />
-                        <Button onClick={(e) => buscarMotoXDocumento(e)}> consultar</Button>
+                            onChange={(e) => setNumeroFactura(e.target.value)} disabled/>
+                        <SearchIcon onClick={(e) => buscarMotoXDocumento(e)} disabled/>
+                        <Button onClick={(e) => buscarMotoXDocumento(e)} disabled> consultar</Button>
                     </Grid>
                     <Grid item xs={12} md={3} sm={6}>
                         <p style={{

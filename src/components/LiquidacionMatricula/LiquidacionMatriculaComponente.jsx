@@ -369,9 +369,9 @@ const LiquidacionMatriculaComponente = (props) => {
                             label=""
                             variant="standard"
                             value={codigoAnticipo}
-                            onChange={(e) => setCodigoAnticipo(e.target.value)} />
-                        <SearchIcon onClick={(e) => buscar_Anticipo(e)} />
-                        <Button onClick={(e) => buscar_Anticipo(e)} variant='contained'> consultar</Button>
+                            onChange={(e) => setCodigoAnticipo(e.target.value)} disabled/>
+                        <SearchIcon onClick={(e) => buscar_Anticipo(e)} disabled />
+                        <Button onClick={(e) => buscar_Anticipo(e)} variant='contained' disabled> consultar</Button>
                     </Grid>
                     <Grid item xs={3}>
                         <p style={{

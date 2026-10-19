@@ -62,7 +62,7 @@ const UploadExcelProvedor_BC = () => {
         if (value === 'pv') {
             newObject = {
                 cod_producto: args[0],
-                cod_provedor: args[1] // Accede al siguiente elemento para cod_provedor
+                cod_provedor: args[1] 
             };
         }
         if (value === 'pc') {
@@ -72,7 +72,7 @@ const UploadExcelProvedor_BC = () => {
                 cod_provedor: args[2].toString(),
                 cod_producto: args[3].toString(),
                 cost: args[4].toString(),
-                user_create: userLogin.User// Accede al siguiente elemento para cod_provedor
+                user_create: userLogin.User
             };
         }
         return newObject;

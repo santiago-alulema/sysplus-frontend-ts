@@ -10,7 +10,9 @@ const SearchAgencia = ({setCodAgencia, title= "AGENCIA"}) => {
     const [organizations, setOrganizations] = useState([]);
     const get_Organitations = async () => {
         const response = await Get_Organizations();
-        setOrganizations([{ ad_org_id: "", name: "--SELECCIONAR AGENCIA--" }, ...response]);
+        setOrganizations([{ ad_org_id: "", name: "--SELECCIONAR AGENCIA--" },
+                          { ad_org_id: "5E9EFB596D774A9DA6D2AE2432558A5A", name: "B81-BODEGA-MAPASINGUE" },
+                          ...response]);
     };
 
     const handleSelect = (event, newValue) => {

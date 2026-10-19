@@ -106,6 +106,14 @@ import ReportesTomaFisicaPage from "@/pages/Inventario/pages/ReportesTomaFisicaP
 import ModificarCodigoInventarioPage from "@/pages/Inventario/pages/ModificarCodigoInventarioPage";
 import ValoresMatriculacionPage from "@/pages/ValoresMatriculacion/pages/ValoresMatriculacionPage";
 import ValoresMatriculacionIndex from "@/pages/ValoresMatriculacion/pages/ValoresMatriculacionIndex";
+import ControlPagosPlaca from "@/pages/modulo-matriculacion/pages/ControlPagosPlaca";
+import MesaTrabajoGestoresPage from "@/pages/modulo-matriculacion/pages/MesaTrabajoGestores.page";
+import MesaTrabajoAgenciasPage from "@/pages/modulo-matriculacion/pages/MesaTrabajoAgencias.page";
+import ControlDepositoGestores from "@/pages/modulo-matriculacion/pages/ControlDepositoGestores";
+import ControlProcesosMatriculacionPage from "@/pages/modulo-matriculacion/pages/ControlProcesosMatriculacion.page";
+import MigracionExtractosPage from "@/pages/Modulo_Contabilidad/feature/extractos-bancarios/pages/MigracionExtractos.page";
+import ReporteExtractoBancariosPage from "@/pages/Modulo_Contabilidad/feature/extractos-bancarios/pages/ReporteExtractoBancarios.page";
+import SubirExtractosBancariosPage from "@/pages/Modulo_Contabilidad/feature/extractos-bancarios/pages/SubirExtractosBancarios.page";
 
 export const routes = [
 
@@ -124,20 +132,27 @@ export const routes = [
   { path: "/reporte-toma-fisica-empresas-nuevas", element: <ReportesTomaFisicaPage /> },
   { path: "/editar-codigo-inventario-item", element: <ModificarCodigoInventarioPage /> },
 
-
-
-
-
-
   { path: "/administracion-agencias-inventario", element: <AgenciasInventarioPage /> },
   { path: "/administracion-toma-fisica", element: <TomaFisicaInventarioPage /> },
   { path: "/administracion-empleados-inventario", element: <EmpleadosInventarioPage /> },
   { path: "/administracion-valores-matriculacion", element: <ValoresMatriculacionIndex /> },
-
-
+  
+// MODULO DE MATRICULACION
   { path: "/control-matriculacion-principal", element: <ControlMatriculacion /> },
-  { path: "/matriculacion-subir-pagos-sri", element: <SubirPagosSriPage /> },
-  { path: "/matriculacion-subir-pagos-bancos", element: <SubirPagosBancosPage /> },
+  { path: "/control-deposito-gestores", element: <ControlDepositoGestores /> },
+  { path: "/control-pagos-placa", element: <ControlPagosPlaca /> },
+  { path: "/control-subir-pagos-sri", element: <SubirPagosSriPage /> },
+  { path: "/mesa-trabajo-gestores", element: <MesaTrabajoGestoresPage /> },
+  { path: "/mesa-trabajo-agencia", element: <MesaTrabajoAgenciasPage /> },
+  { path: "/mf-reporte-control-proceso", element: <ControlProcesosMatriculacionPage /> },
+// -----------
+
+// EXTRACTOS BANCARIOS
+  { path: "/reporte-extractos-bancarios", element: <ReporteExtractoBancariosPage /> },
+  { path: "/migracion-extractos-bancarios", element: <MigracionExtractosPage /> },
+  { path: "/control-extractos-bancarios", element: <SubirExtractosBancariosPage /> },
+// -----------
+
 
 
   { path: "/subir-pcrs", element: <SubirPcrsIndex /> },
